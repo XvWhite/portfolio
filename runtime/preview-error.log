@@ -1,0 +1,249 @@
+[2m01:30:19[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "./section-reveal.css" from "src/main.jsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:15:7
+[33m  13 |  import "./flip-projects.css";
+  14 |  import "./refinement.css";
+  15 |  import "./section-reveal.css";
+     |          ^
+  16 |  const projects = [
+  17 |    { id: "01", title: "Nana Jacqueline", subtitle: "让风格，拥有真实的质感。", type: "时尚视觉", image: "fashion.jpg", role: "设计师", tags: ["AI 模特", "服装视觉", "品牌影像"], desc: "为品牌服装与珠宝打造模特展示视觉，覆盖珠宝佩戴特写、服装上身四视图及品牌场景图片与视频。围绕固定人物外貌、妆容与发型，统一系列视觉，并还原服装、首饰的款式与材质。", focus: "人物一致性 / 真实皮肤质感 / 商业场景构建" },[39m
+[2m01:30:19[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./section-reveal.css" from "src/main.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:15:7
+[33m  13 |  import "./flip-projects.css";
+  14 |  import "./refinement.css";
+  15 |  import "./section-reveal.css";
+     |          ^
+  16 |  const projects = [
+  17 |    { id: "01", title: "Nana Jacqueline", subtitle: "让风格，拥有真实的质感。", type: "时尚视觉", image: "fashion.jpg", role: "设计师", tags: ["AI 模特", "服装视觉", "品牌影像"], desc: "为品牌服装与珠宝打造模特展示视觉，覆盖珠宝佩戴特写、服装上身四视图及品牌场景图片与视频。围绕固定人物外貌、妆容与发型，统一系列视觉，并还原服装、首饰的款式与材质。", focus: "人物一致性 / 真实皮肤质感 / 商业场景构建" },[39m
+      at TransformPluginContext._formatLog (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 14)
+      at async TransformPluginContext.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+[2m13:38:28[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "./color-memory.css" from "src/main.jsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:14:7
+[33m  12 |  import "./refinement.css";
+  13 |  import "./section-reveal.css";
+  14 |  import "./color-memory.css";
+     |          ^
+  15 |  const ProjectGallery = lazy(() => import("./components/ProjectGallery"));
+  16 |  const Grainient = lazy(() => import("./components/Grainient"));[39m
+[2m13:38:28[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "./color-memory.css" from "src/main.jsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:14:7
+[33m  12 |  import "./refinement.css";
+  13 |  import "./section-reveal.css";
+  14 |  import "./color-memory.css";
+     |          ^
+  15 |  const ProjectGallery = lazy(() => import("./components/ProjectGallery"));
+  16 |  const Grainient = lazy(() => import("./components/Grainient"));[39m
+[2m13:38:28[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./color-memory.css" from "src/main.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:14:7
+[33m  12 |  import "./refinement.css";
+  13 |  import "./section-reveal.css";
+  14 |  import "./color-memory.css";
+     |          ^
+  15 |  const ProjectGallery = lazy(() => import("./components/ProjectGallery"));
+  16 |  const Grainient = lazy(() => import("./components/Grainient"));[39m
+      at TransformPluginContext._formatLog (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 13)
+      at async TransformPluginContext.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+[2m13:38:28[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./color-memory.css" from "src/main.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:14:7
+[33m  12 |  import "./refinement.css";
+  13 |  import "./section-reveal.css";
+  14 |  import "./color-memory.css";
+     |          ^
+  15 |  const ProjectGallery = lazy(() => import("./components/ProjectGallery"));
+  16 |  const Grainient = lazy(() => import("./components/Grainient"));[39m
+      at TransformPluginContext._formatLog (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 13)
+      at async TransformPluginContext.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+[2m13:39:07[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "./color-memory.css" from "src/main.jsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:14:7
+[33m  12 |  import "./refinement.css";
+  13 |  import "./section-reveal.css";
+  14 |  import "./color-memory.css";
+     |          ^
+  15 |  const ProjectGallery = lazy(() => import("./components/ProjectGallery"));
+  16 |  const Grainient = lazy(() => import("./components/Grainient"));[39m
+[2m13:39:07[22m [31m[1m[vite][22m[39m Pre-transform error: Failed to resolve import "./color-memory.css" from "src/main.jsx". Does the file exist?
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:14:7
+[33m  12 |  import "./refinement.css";
+  13 |  import "./section-reveal.css";
+  14 |  import "./color-memory.css";
+     |          ^
+  15 |  const ProjectGallery = lazy(() => import("./components/ProjectGallery"));
+  16 |  const Grainient = lazy(() => import("./components/Grainient"));[39m
+[2m13:39:07[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./color-memory.css" from "src/main.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:14:7
+[33m  12 |  import "./refinement.css";
+  13 |  import "./section-reveal.css";
+  14 |  import "./color-memory.css";
+     |          ^
+  15 |  const ProjectGallery = lazy(() => import("./components/ProjectGallery"));
+  16 |  const Grainient = lazy(() => import("./components/Grainient"));[39m
+      at TransformPluginContext._formatLog (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 13)
+      at async TransformPluginContext.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+[2m13:39:07[22m [31m[1m[vite][22m[39m [31mInternal server error: Failed to resolve import "./color-memory.css" from "src/main.jsx". Does the file exist?[39m
+  Plugin: [35mvite:import-analysis[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:14:7
+[33m  12 |  import "./refinement.css";
+  13 |  import "./section-reveal.css";
+  14 |  import "./color-memory.css";
+     |          ^
+  15 |  const ProjectGallery = lazy(() => import("./components/ProjectGallery"));
+  16 |  const Grainient = lazy(() => import("./components/Grainient"));[39m
+      at TransformPluginContext._formatLog (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42846:41)
+      at TransformPluginContext.error (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42843:16)
+      at normalizeUrl (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40820:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40939:37
+      at async Promise.all (index 13)
+      at async TransformPluginContext.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:40866:7)
+      at async EnvironmentPluginContainer.transform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:42641:18)
+      at async loadAndTransform (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:36053:27)
+      at async viteTransformMiddleware (file:///E:/codex-no/portfolio/node_modules/.pnpm/vite@6.4.4_jiti@2.7.0_lightningcss@1.32.0/node_modules/vite/dist/node/chunks/dep-3O3b9SCF.js:37550:24)
+[2m16:09:50[22m [31m[1m[vite][22m[39m Pre-transform error: Transform failed with 1 error:
+E:/codex-no/portfolio/src/main.jsx:75:525: ERROR: Expected "}" but found "has"
+  Plugin: [35mvite:esbuild[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:75:525
+[33m  
+  [33mExpected "}" but found "has"[33m
+  73 |   const memoryStyle={'--memory-gradient':memoryGradient,'--memory-primary':palette[0],'--memory-secondary':palette.at(-1),'--memory-count':viewedItems.length};
+  74 |   return <>
+  75 |    <SpotlightCard className={`nav wrap${viewedItems.length?' has-color-memory':'}` } style={memoryStyle} role="banner" spotlightColor="rgba(202,232,188,1)" intensity={.16} spotlightSize={300} borderGlow={.72} smoothing={.24}><a className="brand" href="#home" aria-label="郭春浩 首页">gch<span>®</span></a><nav aria-label="主导航"><a href="#home">首页</a><a href="#about">关于我</a><a href="#work">精选作品</a><a href="#expertise">个人优势</a></nav><div className={`nav-color-memory${viewedItems.length?' has-memory':''}`} aria-label={`已留下 ${viewedItems.length} 种作品色彩，共 ${projects.length} 个作品`} title={viewedItems.length?`已看过：${viewedItems.map(project=>project.title).join('、')}`:'进入作品详情，留下属于它的色彩'}><span>COLORS</span><div>{projects.map(project=><i key={project.id} className={viewedProjects.includes(project.id)?'is-active':''} style={{'--nav-color':project.color,'--nav-color-alt':project.color2}}/>)}</div><small>{String(viewedItems.length).padStart(2,'0')} / 05</small></div><a className="contact-button" href="#contact">联系我 <Arrow/></a></SpotlightCard>
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+  76 |    <main>
+  77 |     <div className={`intro-scene${viewedItems.length?' has-color-memory':''}`} style={memoryStyle}>
+  [39m
+[2m16:09:50[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+E:/codex-no/portfolio/src/main.jsx:75:525: ERROR: Expected "}" but found "has"[39m
+  Plugin: [35mvite:esbuild[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:75:525
+[33m  
+  [33mExpected "}" but found "has"[33m
+  73 |   const memoryStyle={'--memory-gradient':memoryGradient,'--memory-primary':palette[0],'--memory-secondary':palette.at(-1),'--memory-count':viewedItems.length};
+  74 |   return <>
+  75 |    <SpotlightCard className={`nav wrap${viewedItems.length?' has-color-memory':'}` } style={memoryStyle} role="banner" spotlightColor="rgba(202,232,188,1)" intensity={.16} spotlightSize={300} borderGlow={.72} smoothing={.24}><a className="brand" href="#home" aria-label="郭春浩 首页">gch<span>®</span></a><nav aria-label="主导航"><a href="#home">首页</a><a href="#about">关于我</a><a href="#work">精选作品</a><a href="#expertise">个人优势</a></nav><div className={`nav-color-memory${viewedItems.length?' has-memory':''}`} aria-label={`已留下 ${viewedItems.length} 种作品色彩，共 ${projects.length} 个作品`} title={viewedItems.length?`已看过：${viewedItems.map(project=>project.title).join('、')}`:'进入作品详情，留下属于它的色彩'}><span>COLORS</span><div>{projects.map(project=><i key={project.id} className={viewedProjects.includes(project.id)?'is-active':''} style={{'--nav-color':project.color,'--nav-color-alt':project.color2}}/>)}</div><small>{String(viewedItems.length).padStart(2,'0')} / 05</small></div><a className="contact-button" href="#contact">联系我 <Arrow/></a></SpotlightCard>
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+  76 |    <main>
+  77 |     <div className={`intro-scene${viewedItems.length?' has-color-memory':''}`} style={memoryStyle}>
+  [39m
+      at failureErrorWithLog (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:1467:15)
+      at E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:736:50
+      at responseCallbacks.<computed> (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:603:9)
+      at handleIncomingPacket (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:658:12)
+      at Socket.readFromStdout (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:581:7)
+      at Socket.emit (node:events:514:28)
+      at addChunk (node:internal/streams/readable:568:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:519:3)
+      at Readable.push (node:internal/streams/readable:399:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+[2m16:09:50[22m [31m[1m[vite][22m[39m Pre-transform error: Transform failed with 1 error:
+E:/codex-no/portfolio/src/main.jsx:75:525: ERROR: Expected "}" but found "has"
+  Plugin: [35mvite:esbuild[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:75:525
+[33m  
+  [33mExpected "}" but found "has"[33m
+  73 |   const memoryStyle={'--memory-gradient':memoryGradient,'--memory-primary':palette[0],'--memory-secondary':palette.at(-1),'--memory-count':viewedItems.length};
+  74 |   return <>
+  75 |    <SpotlightCard className={`nav wrap${viewedItems.length?' has-color-memory':'}` } style={memoryStyle} role="banner" spotlightColor="rgba(202,232,188,1)" intensity={.16} spotlightSize={300} borderGlow={.72} smoothing={.24}><a className="brand" href="#home" aria-label="郭春浩 首页">gch<span>®</span></a><nav aria-label="主导航"><a href="#home">首页</a><a href="#about">关于我</a><a href="#work">精选作品</a><a href="#expertise">个人优势</a></nav><div className={`nav-color-memory${viewedItems.length?' has-memory':''}`} aria-label={`已留下 ${viewedItems.length} 种作品色彩，共 ${projects.length} 个作品`} title={viewedItems.length?`已看过：${viewedItems.map(project=>project.title).join('、')}`:'进入作品详情，留下属于它的色彩'}><span>COLORS</span><div>{projects.map(project=><i key={project.id} className={viewedProjects.includes(project.id)?'is-active':''} style={{'--nav-color':project.color,'--nav-color-alt':project.color2}}/>)}</div><small>{String(viewedItems.length).padStart(2,'0')} / 05</small></div><a className="contact-button" href="#contact">联系我 <Arrow/></a></SpotlightCard>
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+  76 |    <main>
+  77 |     <div className={`intro-scene${viewedItems.length?' has-color-memory':''}`} style={memoryStyle}>
+  [39m
+[2m16:09:50[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+E:/codex-no/portfolio/src/main.jsx:75:525: ERROR: Expected "}" but found "has"[39m
+  Plugin: [35mvite:esbuild[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:75:525
+[33m  
+  [33mExpected "}" but found "has"[33m
+  73 |   const memoryStyle={'--memory-gradient':memoryGradient,'--memory-primary':palette[0],'--memory-secondary':palette.at(-1),'--memory-count':viewedItems.length};
+  74 |   return <>
+  75 |    <SpotlightCard className={`nav wrap${viewedItems.length?' has-color-memory':'}` } style={memoryStyle} role="banner" spotlightColor="rgba(202,232,188,1)" intensity={.16} spotlightSize={300} borderGlow={.72} smoothing={.24}><a className="brand" href="#home" aria-label="郭春浩 首页">gch<span>®</span></a><nav aria-label="主导航"><a href="#home">首页</a><a href="#about">关于我</a><a href="#work">精选作品</a><a href="#expertise">个人优势</a></nav><div className={`nav-color-memory${viewedItems.length?' has-memory':''}`} aria-label={`已留下 ${viewedItems.length} 种作品色彩，共 ${projects.length} 个作品`} title={viewedItems.length?`已看过：${viewedItems.map(project=>project.title).join('、')}`:'进入作品详情，留下属于它的色彩'}><span>COLORS</span><div>{projects.map(project=><i key={project.id} className={viewedProjects.includes(project.id)?'is-active':''} style={{'--nav-color':project.color,'--nav-color-alt':project.color2}}/>)}</div><small>{String(viewedItems.length).padStart(2,'0')} / 05</small></div><a className="contact-button" href="#contact">联系我 <Arrow/></a></SpotlightCard>
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+  76 |    <main>
+  77 |     <div className={`intro-scene${viewedItems.length?' has-color-memory':''}`} style={memoryStyle}>
+  [39m
+      at failureErrorWithLog (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:1467:15)
+      at E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:736:50
+      at responseCallbacks.<computed> (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:603:9)
+      at handleIncomingPacket (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:658:12)
+      at Socket.readFromStdout (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:581:7)
+      at Socket.emit (node:events:514:28)
+      at addChunk (node:internal/streams/readable:568:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:519:3)
+      at Readable.push (node:internal/streams/readable:399:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+[2m16:10:47[22m [31m[1m[vite][22m[39m Pre-transform error: Transform failed with 1 error:
+E:/codex-no/portfolio/src/main.jsx:75:525: ERROR: Expected "}" but found "has"
+  Plugin: [35mvite:esbuild[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:75:525
+[33m  
+  [33mExpected "}" but found "has"[33m
+  73 |   const memoryStyle={'--memory-gradient':memoryGradient,'--memory-primary':palette[0],'--memory-secondary':palette.at(-1),'--memory-count':viewedItems.length};
+  74 |   return <>
+  75 |    <SpotlightCard className={`nav wrap${viewedItems.length?' has-color-memory':'}` } style={memoryStyle} role="banner" spotlightColor="rgba(202,232,188,1)" intensity={.16} spotlightSize={300} borderGlow={.72} smoothing={.24}><a className="brand" href="#home" aria-label="郭春浩 首页">gch<span>®</span></a><nav aria-label="主导航"><a href="#home">首页</a><a href="#about">关于我</a><a href="#work">精选作品</a><a href="#expertise">个人优势</a></nav><div className={`nav-color-memory${viewedItems.length?' has-memory':''}`} aria-label={`已留下 ${viewedItems.length} 种作品色彩，共 ${projects.length} 个作品`} title={viewedItems.length?`已看过：${viewedItems.map(project=>project.title).join('、')}`:'进入作品详情，留下属于它的色彩'}><span>COLORS</span><div>{projects.map(project=><i key={project.id} className={viewedProjects.includes(project.id)?'is-active':''} style={{'--nav-color':project.color,'--nav-color-alt':project.color2}}/>)}</div><small>{String(viewedItems.length).padStart(2,'0')} / 05</small></div><a className="contact-button" href="#contact">联系我 <Arrow/></a></SpotlightCard>
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+  76 |    <main>
+  77 |     <div className={`intro-scene${viewedItems.length?' has-color-memory':''}`} style={memoryStyle}>
+  [39m
+[2m16:10:47[22m [31m[1m[vite][22m[39m [31mInternal server error: Transform failed with 1 error:
+E:/codex-no/portfolio/src/main.jsx:75:525: ERROR: Expected "}" but found "has"[39m
+  Plugin: [35mvite:esbuild[39m
+  File: [36mE:/codex-no/portfolio/src/main.jsx[39m:75:525
+[33m  
+  [33mExpected "}" but found "has"[33m
+  73 |   const memoryStyle={'--memory-gradient':memoryGradient,'--memory-primary':palette[0],'--memory-secondary':palette.at(-1),'--memory-count':viewedItems.length};
+  74 |   return <>
+  75 |    <SpotlightCard className={`nav wrap${viewedItems.length?' has-color-memory':'}` } style={memoryStyle} role="banner" spotlightColor="rgba(202,232,188,1)" intensity={.16} spotlightSize={300} borderGlow={.72} smoothing={.24}><a className="brand" href="#home" aria-label="郭春浩 首页">gch<span>®</span></a><nav aria-label="主导航"><a href="#home">首页</a><a href="#about">关于我</a><a href="#work">精选作品</a><a href="#expertise">个人优势</a></nav><div className={`nav-color-memory${viewedItems.length?' has-memory':''}`} aria-label={`已留下 ${viewedItems.length} 种作品色彩，共 ${projects.length} 个作品`} title={viewedItems.length?`已看过：${viewedItems.map(project=>project.title).join('、')}`:'进入作品详情，留下属于它的色彩'}><span>COLORS</span><div>{projects.map(project=><i key={project.id} className={viewedProjects.includes(project.id)?'is-active':''} style={{'--nav-color':project.color,'--nav-color-alt':project.color2}}/>)}</div><small>{String(viewedItems.length).padStart(2,'0')} / 05</small></div><a className="contact-button" href="#contact">联系我 <Arrow/></a></SpotlightCard>
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+  76 |    <main>
+  77 |     <div className={`intro-scene${viewedItems.length?' has-color-memory':''}`} style={memoryStyle}>
+  [39m
+      at failureErrorWithLog (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:1467:15)
+      at E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:736:50
+      at responseCallbacks.<computed> (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:603:9)
+      at handleIncomingPacket (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:658:12)
+      at Socket.readFromStdout (E:\codex-no\portfolio\node_modules\.pnpm\esbuild@0.25.12\node_modules\esbuild\lib\main.js:581:7)
+      at Socket.emit (node:events:514:28)
+      at addChunk (node:internal/streams/readable:568:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:519:3)
+      at Readable.push (node:internal/streams/readable:399:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+[2m17:16:15[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/components/FlipCard.jsx (resolved id: E:/codex-no/portfolio/src/components/FlipCard.jsx) in E:/codex-no/portfolio/src/main.jsx. Does the file exist?

@@ -1,0 +1,15 @@
+.card-swap{position:relative;width:100%;height:100%;min-height:0;outline:none;-webkit-tap-highlight-color:transparent;touch-action:none;user-select:none}
+.card-swap-stage{position:absolute;inset:0;perspective:1100px;transform-style:preserve-3d}
+.card-swap-slot{position:absolute;left:50%;top:50%;width:min(var(--swap-w),82%);height:min(var(--swap-h),92%);overflow:hidden;border:0;border-radius:var(--swap-radius);background:transparent;box-shadow:0 34px 78px rgba(0,0,0,.38);transform-origin:center center;transition:transform var(--swap-speed) cubic-bezier(.2,var(--swap-ease-y),.2,1),opacity .48s ease,box-shadow .45s ease;touch-action:none;user-select:none;will-change:transform,opacity}
+.card-swap-slot.is-front{cursor:grab;box-shadow:0 42px 100px rgba(0,0,0,.52)}
+.card-swap[data-dragging] .card-swap-slot.is-front{cursor:grabbing;transition:none}
+.card-swap-slot.is-exiting{pointer-events:none!important;transition:transform .34s cubic-bezier(.45,0,.65,1),opacity .28s ease,box-shadow .28s ease}
+.card-swap:focus-visible .card-swap-slot.is-front{outline:1px solid rgba(255,255,255,.65);outline-offset:5px}
+.card-swap-card{position:relative;width:100%;height:100%;overflow:hidden;border:0;border-radius:inherit;background:transparent}
+.card-swap-progress{position:absolute;left:50%;bottom:0;z-index:20;display:flex;gap:7px;transform:translateX(-50%)}
+.card-swap-progress i{display:block;width:18px;height:2px;background:rgba(255,255,255,.24);transition:width .35s ease,background .35s ease}
+.card-swap-progress i.is-active{width:34px;background:rgba(255,255,255,.88)}
+.card-swap[data-intro] .card-swap-slot{animation:cardSwapIntro .8s cubic-bezier(.2,.8,.2,1) both}
+.card-swap[data-intro] .card-swap-slot:nth-child(2){animation-delay:.06s}.card-swap[data-intro] .card-swap-slot:nth-child(3){animation-delay:.12s}.card-swap[data-intro] .card-swap-slot:nth-child(4){animation-delay:.18s}
+@keyframes cardSwapIntro{from{opacity:0;filter:blur(10px)}to{filter:blur(0)}}
+@media(prefers-reduced-motion:reduce){.card-swap-slot{transition:none}}

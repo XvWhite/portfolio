@@ -1,0 +1,8 @@
+/* React Bits Grainient palette supplied by the user. */
+.work,.expertise,.contact{background:transparent}
+.work:before,.expertise:before,.contact:before{display:none}
+.portfolio-scene{position:relative;isolation:isolate}
+.grainient-backdrop{position:absolute;inset:0;z-index:0;pointer-events:none;background:linear-gradient(145deg,#101412,#252927 52%,#29242f)}
+.portfolio-scene>.grainient-backdrop>.grainient-container{position:sticky;top:0;height:100svh;width:100%}
+.portfolio-scene>.work,.portfolio-scene>.expertise,.portfolio-scene>.contact{z-index:1;background:transparent}
+.ability,.ability:nth-child(2),.ability:nth-child(3){background:#ffffff3d;border-color:#ffffff9c;backdrop-filter:blur(16px)}

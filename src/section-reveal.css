@@ -1,0 +1,80 @@
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-ready .reveal-section .section-label,
+  .reveal-ready .reveal-section .section-title,
+  .reveal-ready .about .bio > .eyebrow,
+  .reveal-ready .about .bio > h2,
+  .reveal-ready .about .bio > p,
+  .reveal-ready .about .experience,
+  .reveal-ready .about .contact-lines,
+  .reveal-ready .about .stats > div,
+  .reveal-ready .work .filter-bar,
+  .reveal-ready .work .project-shell,
+  .reveal-ready .expertise .ability,
+  .reveal-ready .contact .contact-intro,
+  .reveal-ready .contact h2,
+  .reveal-ready .contact .contact-channel,
+  .reveal-ready .contact footer {
+    opacity: 0;
+    transform: translate3d(0, 32px, 0);
+    filter: blur(8px);
+    transition: opacity .8s cubic-bezier(.2,.75,.25,1), transform .9s cubic-bezier(.2,.75,.25,1), filter .8s ease;
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-ready .hero .hero-content,
+  .reveal-ready .hero .hero-bottom {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    filter: blur(7px);
+    transition: opacity .9s cubic-bezier(.2,.75,.25,1), transform 1s cubic-bezier(.2,.75,.25,1), filter .9s ease;
+  }
+
+  .reveal-ready .hero.is-visible .hero-content,
+  .reveal-ready .hero.is-visible .hero-bottom,
+  .reveal-ready .reveal-section.is-visible .section-label,
+  .reveal-ready .reveal-section.is-visible .section-title,
+  .reveal-ready .about.is-visible .bio > .eyebrow,
+  .reveal-ready .about.is-visible .bio > h2,
+  .reveal-ready .about.is-visible .bio > p,
+  .reveal-ready .about.is-visible .experience,
+  .reveal-ready .about.is-visible .contact-lines,
+  .reveal-ready .about.is-visible .stats > div,
+  .reveal-ready .work.is-visible .filter-bar,
+  .reveal-ready .work.is-visible .project-shell,
+  .reveal-ready .expertise.is-visible .ability,
+  .reveal-ready .contact.is-visible .contact-intro,
+  .reveal-ready .contact.is-visible h2,
+  .reveal-ready .contact.is-visible .contact-channel,
+  .reveal-ready .contact.is-visible footer {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0);
+  }
+
+  .reveal-ready .hero.is-visible .hero-bottom { transition-delay: .22s; }
+  .reveal-ready .reveal-section.is-visible .section-title { transition-delay: .10s; }
+  .reveal-ready .about.is-visible .bio > .eyebrow { transition-delay: .08s; }
+  .reveal-ready .about.is-visible .bio > h2 { transition-delay: .14s; }
+  .reveal-ready .about.is-visible .bio > p:nth-of-type(1) { transition-delay: .20s; }
+  .reveal-ready .about.is-visible .bio > p:nth-of-type(2) { transition-delay: .26s; }
+  .reveal-ready .about.is-visible .experience { transition-delay: .32s; }
+  .reveal-ready .about.is-visible .contact-lines { transition-delay: .38s; }
+  .reveal-ready .about.is-visible .stats > div:nth-child(1) { transition-delay: .20s; }
+  .reveal-ready .about.is-visible .stats > div:nth-child(2) { transition-delay: .27s; }
+  .reveal-ready .about.is-visible .stats > div:nth-child(3) { transition-delay: .34s; }
+  .reveal-ready .work.is-visible .filter-bar { transition-delay: .16s; }
+  .reveal-ready .work.is-visible .project-shell:nth-child(1) { transition-delay: .20s; }
+  .reveal-ready .work.is-visible .project-shell:nth-child(2) { transition-delay: .27s; }
+  .reveal-ready .work.is-visible .project-shell:nth-child(3) { transition-delay: .34s; }
+  .reveal-ready .work.is-visible .project-shell:nth-child(4) { transition-delay: .41s; }
+  .reveal-ready .work.is-visible .project-shell:nth-child(5) { transition-delay: .48s; }
+  .reveal-ready .expertise.is-visible .ability:nth-child(1) { transition-delay: .18s; }
+  .reveal-ready .expertise.is-visible .ability:nth-child(2) { transition-delay: .25s; }
+  .reveal-ready .expertise.is-visible .ability:nth-child(3) { transition-delay: .32s; }
+  .reveal-ready .expertise.is-visible .ability:nth-child(4) { transition-delay: .39s; }
+  .reveal-ready .contact.is-visible .contact-intro { transition-delay: .10s; }
+  .reveal-ready .contact.is-visible h2 { transition-delay: .16s; }
+  .reveal-ready .contact.is-visible .contact-channel:nth-child(1) { transition-delay: .24s; }
+  .reveal-ready .contact.is-visible .contact-channel:nth-child(2) { transition-delay: .31s; }
+  .reveal-ready .contact.is-visible footer { transition-delay: .38s; }
+}

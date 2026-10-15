@@ -1,0 +1,6 @@
+.spotlight-card{position:relative;isolation:isolate;overflow:hidden;--spot-x:50%;--spot-y:50%;--spot-opacity:0;--spot-flare:0}
+.spotlight-card__light,.spotlight-card__border{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.spotlight-card__light{z-index:0;opacity:calc(var(--spot-opacity) * (var(--spot-intensity) + var(--spot-flare) * .08));background:radial-gradient(circle calc(var(--spot-size) * (1 + var(--spot-flare) * .18)) at var(--spot-x) var(--spot-y),var(--spot-color) 0%,transparent 72%);mix-blend-mode:screen}
+.spotlight-card__border{z-index:3;padding:1px;opacity:calc(var(--spot-opacity) * var(--spot-border-glow));background:radial-gradient(circle calc(var(--spot-size) * .7) at var(--spot-x) var(--spot-y),var(--spot-color),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0)}
+.spotlight-card>:not(.spotlight-card__light):not(.spotlight-card__border){position:relative;z-index:2}
+@media(prefers-reduced-motion:reduce){.spotlight-card__light,.spotlight-card__border{display:none}}

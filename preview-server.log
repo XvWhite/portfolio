@@ -1,0 +1,67 @@
+
+  VITE v6.4.4  ready in 521 ms
+
+  ➜  Local:   http://127.0.0.1:5173/
+  ➜  press h + enter to show help
+13:06:58 [vite] (client) page reload reactbits-installation.html
+13:06:58 [vite] (client) page reload reactbits-installation.html
+13:13:13 [vite] (client) page reload src/main.jsx
+13:19:45 [vite] (client) page reload src/components/PortfolioDepthCard.jsx
+13:22:21 [vite] (client) hmr update /src/style.css
+13:23:25 [vite] (client) hmr update /src/style.css
+13:24:04 [vite] .env.local changed, restarting server...
+13:24:04 [vite] server restarted.
+14:35:00 [vite] (client) page reload package.json
+14:36:07 [vite] (client) page reload src/components/PortfolioDepthCard.jsx
+14:36:51 [vite] (client) page reload src/main.jsx
+14:36:52 [vite] (client) page reload src/flip-projects.css
+14:36:52 [vite] (client) ✨ new dependencies optimized: motion/react
+14:36:52 [vite] (client) ✨ optimized dependencies changed. reloading
+14:36:52 [vite] (client) hmr update /src/depth-projects.css, /src/style.css
+14:42:51 [vite] (client) page reload src/components/FlipCard.jsx
+14:44:42 [vite] (client) page reload src/components/FlipCard.jsx
+14:44:42 [vite] (client) page reload src/main.jsx
+14:44:43 [vite] (client) hmr update /src/style.css, /src/components/FlipCard.css
+15:41:50 [vite] (client) page reload package.json
+15:49:00 [vite] (client) page reload src/main.jsx
+15:49:00 [vite] (client) hmr update /src/flip-projects.css, /src/style.css
+15:49:00 [vite] (client) ✨ new dependencies optimized: ogl
+15:49:00 [vite] (client) ✨ optimized dependencies changed. reloading
+15:49:01 [vite] (client) hmr update /src/style.css, /src/components/FlipCard.css
+15:49:38 [vite] (client) page reload prepare_gallery.py
+15:50:00 [vite] (client) page reload public/images/gallery/looks/10.webp
+15:50:02 [vite] (client) page reload public/images/gallery/looks/11.webp
+15:50:06 [vite] (client) page reload public/images/gallery/looks/12.webp
+15:50:07 [vite] (client) page reload public/images/gallery/tear/01.webp
+15:50:08 [vite] (client) page reload public/images/gallery/tear/02.webp
+15:50:08 [vite] (client) page reload public/images/gallery/tear/03.webp
+15:50:09 [vite] (client) page reload public/images/gallery/tear/04.webp
+15:50:10 [vite] (client) page reload public/images/gallery/tear/05.webp
+15:50:11 [vite] (client) page reload public/images/gallery/tear/06.webp
+15:50:12 [vite] (client) page reload public/images/gallery/tear/07.webp
+15:50:13 [vite] (client) page reload public/images/gallery/tear/08.webp
+15:50:13 [vite] (client) page reload public/images/gallery/tear/09.webp
+15:50:14 [vite] (client) page reload public/images/gallery/tear/10.webp
+15:50:14 [vite] (client) page reload public/images/gallery/toposh/01.webp
+15:50:15 [vite] (client) page reload public/images/gallery/toposh/02.webp
+15:50:15 [vite] (client) page reload public/images/gallery/toposh/03.webp
+15:50:16 [vite] (client) page reload public/images/gallery/toposh/04.webp
+15:50:16 [vite] (client) page reload public/images/gallery/toposh/05.webp
+15:50:16 [vite] (client) page reload public/images/gallery/toposh/06.webp
+15:50:16 [vite] (client) page reload public/images/gallery/toposh/07.webp
+15:50:17 [vite] (client) page reload src/gallery-data.json
+17:01:49 [vite] (client) hmr update /src/style.css, /src/components/FlipCard.css
+17:01:50 [vite] (client) page reload src/components/FlexCarousel.tsx
+17:01:50 [vite] (client) page reload src/components/ProjectGallery.jsx
+17:01:51 [vite] (client) hmr update /src/style.css, /src/components/ProjectGallery.css
+17:41:00 [vite] (client) page reload src/components/ProjectGallery.jsx
+17:41:43 [vite] (client) page reload src/components/ProjectGallery.jsx
+17:41:52 [vite] (client) hmr update /src/style.css, /src/components/ProjectGallery.css
+17:42:39 [vite] (client) page reload src/components/ProjectGallery.css
+17:47:10 [vite] (client) page reload src/components/FlipCard.jsx
+17:53:01 [vite] (client) page reload src/components/FlipCard.jsx
+17:53:02 [vite] (client) hmr update /src/style.css, /src/components/FlipCard.css
+17:53:02 [vite] (client) hmr update /src/flip-projects.css, /src/style.css
+17:59:30 [vite] (client) hmr update /src/flip-projects.css, /src/style.css
+18:16:43 [vite] (client) page reload src/components/ProjectGallery.jsx
+18:17:11 [vite] (client) hmr update /src/style.css, /src/components/ProjectGallery.css

@@ -1,0 +1,13 @@
+.tech-text{display:inline-flex;flex-direction:column;align-items:flex-start;position:relative;isolation:isolate;white-space:pre;color:var(--tech-color);font:inherit;line-height:inherit;letter-spacing:inherit;cursor:crosshair}
+.tech-text__line{display:inline-flex;align-items:baseline;white-space:pre}
+.tech-text__glyph{position:relative;display:inline-block;color:var(--tech-color);transform:translateZ(0)}
+.tech-text__glyph.is-accent{font-family:inherit;font-weight:inherit}
+.tech-text__ink{display:block;color:currentColor;transition:color .24s ease,filter .24s ease,transform .32s cubic-bezier(.2,.75,.25,1)}
+.tech-text__glyph.is-active .tech-text__ink{color:transparent;-webkit-text-stroke:var(--tech-stroke) var(--tech-color);filter:drop-shadow(0 0 13px color-mix(in srgb,var(--tech-accent) 24%,transparent));transform:translateY(-.018em)}
+.tech-text__frame{position:absolute;inset:-.08em -.055em -.025em;z-index:-1;border:1px dashed color-mix(in srgb,var(--tech-accent) 58%,transparent);animation:techFrameIn .24s ease both;pointer-events:none}
+.tech-text__specks{position:absolute;inset:-.13em;pointer-events:none}
+.tech-text__specks i{position:absolute;width:3px;height:3px;background:var(--tech-accent);opacity:0;animation:techSpeck .85s ease-in-out infinite}
+.tech-text__specks i:nth-child(1){left:0;top:13%;animation-delay:-.1s}.tech-text__specks i:nth-child(2){right:2%;top:0;animation-delay:-.45s}.tech-text__specks i:nth-child(3){right:-3px;top:48%;animation-delay:-.7s}.tech-text__specks i:nth-child(4){right:12%;bottom:-2px;animation-delay:-.25s}.tech-text__specks i:nth-child(5){left:8%;bottom:3%;animation-delay:-.58s}.tech-text__specks i:nth-child(6){left:-2px;top:57%;animation-delay:-.32s}.tech-text__specks i:nth-child(7){left:35%;top:-4px;animation-delay:-.8s}.tech-text__specks i:nth-child(8){left:48%;bottom:-4px;animation-delay:-.17s}
+@keyframes techFrameIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes techSpeck{0%,100%{opacity:0;transform:scale(.5)}35%{opacity:.85;transform:scale(1)}65%{opacity:.2;transform:translate(2px,-2px)}}
+@media(prefers-reduced-motion:reduce){.tech-text__ink,.tech-text__frame,.tech-text__specks i{animation:none!important;transition:none!important}}

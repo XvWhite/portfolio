@@ -1,0 +1,36 @@
+/* Dark surfaces with ungraded, full-color footage beneath a neutral scrim. */
+:root{color-scheme:dark;--line:#ffffff26;background:#111413;color:#eeeFEB}
+body{background:#111413;overflow-x:clip}
+::selection{background:#b9c5b5;color:#101410}
+button:focus-visible,a:focus-visible{outline-color:#d1dec9}
+.nav{background:#101211bd;color:#f0f2ed;box-shadow:0 1px 0 #ffffff1c}
+.nav nav a:hover{color:#c4d8bb}.nav .contact-button{color:#ecefe8;border-color:#c3ccc0}
+.nav .contact-button:hover{color:#fff;opacity:.75}
+.intro-scene,.intro-scene>.hero-media{background:#111}
+.intro-scene>.hero-media video{filter:blur(34px);opacity:1}
+.intro-scene>.hero-wash{background:rgba(0,0,0,.5);backdrop-filter:blur(16px)}
+.intro-scene>.hero-wash:before,.intro-scene>.hero-wash:after{display:none}
+.intro-scene>.hero-grain{opacity:.19;mix-blend-mode:soft-light}
+.intro-scene .hero{color:#f5f5f0}
+.hero-edition p,.hero .eyebrow,.hero-copy .hero-subtitle,.hero-copy .hero-description,.hero .round-link,.hero-bottom,.hero-bottom button{color:#e3e7df}
+.hero .circle{border-color:#d9dfd080}.round-link:hover .circle{background:#e4ebdf;color:#151a12}
+.section-label,.experience,.stats,.stats>div,.ability-en,.contact .section-label,footer{border-color:var(--line)}
+.section-label>span:last-child,.bio>p,.experience p,.stats p,.section-title>p,.filter-bar>span,.project-info p,.project-info>span,.tags span,.ability-top>span:last-child,.ability p{color:#bdc5b8}
+.bio h2 em,.experience strong,.email-small{color:#edf0e8}
+.section-title h2>.purple{color:#b6c2ad}
+.filter-bar button{color:#bbc4b5}.filter-bar button.selected{color:#f2f5ed;border-color:#e5eedc}.filter-bar button:not(.selected):hover{border-color:#9eae92}
+.grainient-backdrop{background:linear-gradient(145deg,#101412,#252927 52%,#29242f)}
+.image-label{background:#141914ad;border-color:#ffffff38;color:#edf2e7}
+.project-open{background:#121812b8;color:#eef3e9;border-color:#ffffff5c}
+.tags span+span:before{color:#7c8975}
+.ability,.ability:nth-child(2),.ability:nth-child(3){background:#ffffff05;border-color:#ffffff22}
+.ability h3,.ability h4,.ability-top>span:first-child{color:#eef2e9}.ability-en{color:#aebca3}
+.contact-star{color:#c0cbb333}.status-dot{background:#b6d4a0}
+.contact-actions>a{border-color:#c5d0bd;color:#eef2e8}
+.contact-actions button{border-color:#8e9f80;color:#dce6d3}.contact-actions button:hover{color:#fff}
+dialog{background:#191e19;color:#e9eee2;border-color:#ffffff2b}dialog::backdrop{background:#000b}
+.dialog-close{background:#222922;color:#eef3e8;border-color:#75836a}
+.dialog-role,.dialog-content small{color:#b4c1a8}.dialog-focus{border-color:var(--line)}
+.dialog-content .contact-button{color:#e8efdf;border-color:#849577}
+.dialog-content .contact-button:hover{background:#d5e1c8;color:#151b10}
+@media(max-width:700px){.intro-scene>.hero-media video{filter:blur(22px);opacity:1}}
