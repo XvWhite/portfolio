@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Hls from 'hls.js';
 import './PortfolioVideoPlayer.css';
 
 const formatTime = value => {
@@ -21,6 +22,7 @@ export default function PortfolioVideoPlayer({
 }) {
   const root = useRef(null);
   const video = useRef(null);
+  const suppressError = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -34,19 +36,49 @@ export default function PortfolioVideoPlayer({
   useEffect(() => {
     const node = video.current;
     if (!node) return;
+    let hls;
+    suppressError.current = true;
+    node.pause();
+    node.removeAttribute('src');
+    node.load();
     if (!active || !src) {
-      node.pause();
-      node.removeAttribute('src');
-      node.load();
       setPlaying(false);
       setCurrentTime(0);
       setDuration(0);
       setBuffered(0);
-      return;
+      return undefined;
     }
+    suppressError.current = false;
     setError(false);
-    node.load();
-    if (autoPlay) node.play().catch(() => setPlaying(false));
+    setLoading(true);
+    const start = () => {
+      if (autoPlay) node.play().catch(() => setPlaying(false));
+    };
+    if (node.canPlayType('application/vnd.apple.mpegurl')) {
+      node.src = src;
+      node.load();
+      start();
+    } else if (Hls.isSupported()) {
+      hls = new Hls({ enableWorker: true, backBufferLength: 30, maxBufferLength: 24, maxMaxBufferLength: 48 });
+      hls.loadSource(src);
+      hls.attachMedia(node);
+      hls.on(Hls.Events.MANIFEST_PARSED, start);
+      hls.on(Hls.Events.ERROR, (_, data) => {
+        if (!data.fatal) return;
+        setLoading(false);
+        setError(true);
+      });
+    } else {
+      setLoading(false);
+      setError(true);
+    }
+    return () => {
+      suppressError.current = true;
+      hls?.destroy();
+      node.pause();
+      node.removeAttribute('src');
+      node.load();
+    };
   }, [active, autoPlay, retryKey, src]);
 
   const syncTimeline = event => {
@@ -110,7 +142,6 @@ export default function PortfolioVideoPlayer({
     <video
       key={retryKey}
       ref={video}
-      src={active ? src : undefined}
       poster={poster}
       preload={active ? preload : 'none'}
       playsInline
@@ -126,7 +157,7 @@ export default function PortfolioVideoPlayer({
       onPause={event => { setPlaying(false); onPause?.(event); }}
       onEnded={event => { setPlaying(false); onPause?.(event); }}
       onVolumeChange={event => { setVolume(event.currentTarget.volume); setMuted(event.currentTarget.muted); }}
-      onError={() => active && src && (setError(true), setLoading(false))}
+      onError={() => !suppressError.current && active && src && (setError(true), setLoading(false))}
     />
 
     {!playing && !error && <button className="portfolio-video-player__center-play" type="button" onClick={togglePlay} onPointerDown={stopControlGesture} data-video-control aria-label={`播放 ${title}`}>▶</button>}

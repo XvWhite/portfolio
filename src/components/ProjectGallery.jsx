@@ -5,7 +5,7 @@ import PortfolioVideoPlayer from './PortfolioVideoPlayer';
 import galleries from '../gallery-data.json';
 import './ProjectGallery.css';
 
-const mediaSrc = path => import.meta.env.DEV ? `/videos/${path}` : `/media/${path}`;
+const mediaSrc = path => `/hls/${path.replace(/\.mp4$/i, '')}/index.m3u8`;
 
 export const projectCover = project => {
   if (project.id === '01') return galleries.scene.find(item => item.source === '3.png').src;
@@ -52,7 +52,7 @@ const VIDEO_GROUP_DETAILS = {
 
 const VIDEO_DETAILS = {
   '04': {
-    src: mediaSrc('skills-ui/skills-ui.mp4'),
+    src: mediaSrc('skills-ui.mp4'),
     poster: '/images/project-covers/skills-ui.webp',
     eyebrow: 'PRODUCT FILM / AI VIDEO',
     title: 'Skills UI 产品商业化宣传视频',
