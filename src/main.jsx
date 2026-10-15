@@ -50,15 +50,22 @@ function App(){
  useEffect(()=>{
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const sections=[...document.querySelectorAll('.reveal-section')];
+  const critical=sections.filter(section=>section.id==='home'||section.id==='about');
+  critical.forEach(section=>section.classList.add('is-visible'));
   document.documentElement.classList.add('reveal-ready');
-  if(reduce){sections.forEach(section=>section.classList.add('is-visible'));return()=>document.documentElement.classList.remove('reveal-ready');}
+  const revealAll=()=>sections.forEach(section=>section.classList.add('is-visible'));
+  if(reduce||!('IntersectionObserver' in window)){revealAll();return()=>document.documentElement.classList.remove('reveal-ready');}
   const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
    if(!entry.isIntersecting)return;
    entry.target.classList.add('is-visible');
    observer.unobserve(entry.target);
   }),{threshold:.12,rootMargin:'0px 0px -8%'});
   sections.forEach(section=>observer.observe(section));
-  return()=>{observer.disconnect();document.documentElement.classList.remove('reveal-ready');};
+  const failOpen=window.setTimeout(()=>critical.forEach(section=>section.classList.add('is-visible')),1400);
+  const restore=()=>critical.forEach(section=>section.classList.add('is-visible'));
+  window.addEventListener('pageshow',restore);
+  document.addEventListener('visibilitychange',restore);
+  return()=>{window.clearTimeout(failOpen);window.removeEventListener('pageshow',restore);document.removeEventListener('visibilitychange',restore);observer.disconnect();document.documentElement.classList.remove('reveal-ready');};
  },[]);
  useEffect(()=>{setContactAwake(false);if(!viewedProjects.length)return;const node=contactRef.current;if(!node)return;const observer=new IntersectionObserver(([entry])=>{if(entry.isIntersecting&&entry.intersectionRatio>=.28){setContactAwake(true);observer.disconnect();}},{threshold:[.28]});observer.observe(node);return()=>observer.disconnect();},[viewedProjects.length]);
  const close=()=>{if(active)setViewedProjects(previous=>previous.includes(active.id)?previous:[...previous,active.id]);setActive(null);requestAnimationFrame(()=>trigger.current?.focus());};

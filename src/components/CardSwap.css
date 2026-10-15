@@ -1,6 +1,6 @@
-.card-swap{position:relative;width:100%;height:100%;min-height:0;outline:none;-webkit-tap-highlight-color:transparent;touch-action:none;user-select:none}
+.card-swap{position:relative;width:100%;height:100%;min-height:0;outline:none;-webkit-tap-highlight-color:transparent;touch-action:pan-y;user-select:none}
 .card-swap-stage{position:absolute;inset:0;perspective:1100px;transform-style:preserve-3d}
-.card-swap-slot{position:absolute;left:50%;top:50%;width:min(var(--swap-w),82%);height:min(var(--swap-h),92%);overflow:hidden;border:0;border-radius:var(--swap-radius);background:transparent;box-shadow:0 34px 78px rgba(0,0,0,.38);transform-origin:center center;transition:transform var(--swap-speed) cubic-bezier(.2,var(--swap-ease-y),.2,1),opacity .48s ease,box-shadow .45s ease;touch-action:none;user-select:none;will-change:transform,opacity}
+.card-swap-slot{position:absolute;left:50%;top:50%;width:min(var(--swap-w),82%);height:min(var(--swap-h),92%);overflow:hidden;border:0;border-radius:var(--swap-radius);background:transparent;box-shadow:0 34px 78px rgba(0,0,0,.38);transform-origin:center center;transition:transform var(--swap-speed) cubic-bezier(.2,var(--swap-ease-y),.2,1),opacity .48s ease,box-shadow .45s ease;touch-action:pan-y;user-select:none;will-change:transform,opacity}
 .card-swap-slot.is-front{cursor:grab;box-shadow:0 42px 100px rgba(0,0,0,.52)}
 .card-swap[data-dragging] .card-swap-slot.is-front{cursor:grabbing;transition:none}
 .card-swap-slot.is-exiting{pointer-events:none!important;transition:transform .34s cubic-bezier(.45,0,.65,1),opacity .28s ease,box-shadow .28s ease}

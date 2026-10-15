@@ -39,7 +39,7 @@ const CardSwap = forwardRef(function CardSwap({
   const orderState = useRef(order);
   const exitTimer = useRef(null);
   const settleTimer = useRef(null);
-  const dragState = useRef({ active: false, x: 0, startX: 0, pointerId: null });
+  const dragState = useRef({ active: false, pending: false, axis: null, x: 0, startX: 0, startY: 0, pointerId: null });
   const exitingState = useRef(null);
   const queuedStep = useRef(null);
   const suppressClick = useRef(false);
@@ -94,38 +94,45 @@ const CardSwap = forwardRef(function CardSwap({
   };
 
   const startDrag = event => {
-    if (!draggable || event.button !== 0 || event.target.closest?.('button,input')) return;
-    event.preventDefault();
-    root.current?.setPointerCapture?.(event.pointerId);
-    dragState.current = { active: true, x: 0, startX: event.clientX, pointerId: event.pointerId };
-    setDrag({ active: true, x: 0, startX: event.clientX });
+    if (!draggable || event.button !== 0 || event.target.closest?.('[data-video-control],button,input')) return;
+    dragState.current = { active: false, pending: true, axis: null, x: 0, startX: event.clientX, startY: event.clientY, pointerId: event.pointerId };
   };
 
   const updateDrag = event => {
     const current = dragState.current;
-    if (!current.active || current.pointerId !== event.pointerId) return;
+    if ((!current.active && !current.pending) || current.pointerId !== event.pointerId) return;
     const x = event.clientX - current.startX;
-    dragState.current = { ...current, x };
+    const y = event.clientY - current.startY;
+    let axis = current.axis;
+    if (!axis && Math.hypot(x, y) >= 8) axis = Math.abs(x) > Math.abs(y) * 1.12 ? 'x' : 'y';
+    if (axis === 'y') {
+      dragState.current = { ...current, pending: false, axis: 'y' };
+      return;
+    }
+    if (axis !== 'x') return;
+    if (!current.active) root.current?.setPointerCapture?.(event.pointerId);
+    if (event.cancelable) event.preventDefault();
+    dragState.current = { ...current, active: true, pending: false, axis: 'x', x };
     setDrag({ active: true, x, startX: current.startX });
   };
 
   const finishDrag = event => {
     const current = dragState.current;
-    if (!current.active || current.pointerId !== event.pointerId) return;
-    root.current?.releasePointerCapture?.(event.pointerId);
-    if (Math.abs(current.x) > 42) step(1, current.x < 0 ? -1 : 1);
-    if (Math.abs(current.x) > 6) {
+    if ((!current.active && !current.pending) || current.pointerId !== event.pointerId) return;
+    if (current.active) root.current?.releasePointerCapture?.(event.pointerId);
+    if (current.active && Math.abs(current.x) > 42) step(1, current.x < 0 ? -1 : 1);
+    if (current.active && Math.abs(current.x) > 6) {
       suppressClick.current = true;
       window.setTimeout(() => { suppressClick.current = false; }, 0);
     }
-    dragState.current = { active: false, x: 0, startX: 0, pointerId: null };
+    dragState.current = { active: false, pending: false, axis: null, x: 0, startX: 0, startY: 0, pointerId: null };
     setDrag({ active: false, x: 0, startX: 0 });
   };
 
   const cancelDrag = event => {
     const current = dragState.current;
     if (current.pointerId !== event.pointerId) return;
-    dragState.current = { active: false, x: 0, startX: 0, pointerId: null };
+    dragState.current = { active: false, pending: false, axis: null, x: 0, startX: 0, startY: 0, pointerId: null };
     setDrag({ active: false, x: 0, startX: 0 });
   };
 

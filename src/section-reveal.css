@@ -78,3 +78,28 @@
   .reveal-ready .contact.is-visible .contact-channel:nth-child(2) { transition-delay: .31s; }
   .reveal-ready .contact.is-visible footer { transition-delay: .38s; }
 }
+
+/* Mobile WebViews, including Xiaomi Browser, can drop filtered layers above video. */
+@media (max-width: 700px) and (prefers-reduced-motion: no-preference) {
+  .reveal-ready .reveal-section .section-label,
+  .reveal-ready .reveal-section .section-title,
+  .reveal-ready .about .bio > .eyebrow,
+  .reveal-ready .about .bio > h2,
+  .reveal-ready .about .bio > p,
+  .reveal-ready .about .experience,
+  .reveal-ready .about .contact-lines,
+  .reveal-ready .about .stats > div,
+  .reveal-ready .work .filter-bar,
+  .reveal-ready .work .project-shell,
+  .reveal-ready .expertise .ability,
+  .reveal-ready .contact .contact-intro,
+  .reveal-ready .contact h2,
+  .reveal-ready .contact .contact-channel,
+  .reveal-ready .contact footer,
+  .reveal-ready .hero .hero-content,
+  .reveal-ready .hero .hero-bottom {
+    filter: none;
+    transition-property: opacity, transform;
+    will-change: opacity, transform;
+  }
+}

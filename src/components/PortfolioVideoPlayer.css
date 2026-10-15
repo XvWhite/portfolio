@@ -1,0 +1,29 @@
+.portfolio-video-player{position:relative;width:100%;height:100%;overflow:hidden;border-radius:inherit;background:#070808;isolation:isolate;color:#fff}
+.portfolio-video-player video{display:block;width:100%;height:100%;object-fit:contain;background:#070808}
+.portfolio-video-player::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:34%;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(0,0,0,.72))}
+.portfolio-video-player__center-play{position:absolute;z-index:4;left:50%;top:50%;width:58px;height:58px;display:grid;place-items:center;transform:translate(-50%,-50%);padding:0 0 0 3px;border:1px solid rgba(255,255,255,.38);border-radius:50%;background:rgba(8,10,9,.48);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font-size:14px}
+.portfolio-video-player__loading{position:absolute;z-index:5;left:50%;top:50%;width:28px;height:28px;margin:-14px;border:2px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:videoLoading .8s linear infinite}
+.portfolio-video-player__error{position:absolute;z-index:7;inset:0;display:grid;place-content:center;justify-items:center;gap:14px;background:rgba(5,6,6,.82);text-align:center}
+.portfolio-video-player__error strong{font-size:13px;font-weight:400}.portfolio-video-player__error button{padding:8px 14px;border:1px solid rgba(255,255,255,.35);border-radius:999px;background:transparent;color:#fff;font-size:10px}
+.portfolio-video-player__controls{position:absolute;z-index:6;left:0;right:0;bottom:0;padding:18px 18px 14px;opacity:.98;transition:opacity .25s ease}
+.portfolio-video-player__timeline{position:relative;height:18px;display:flex;align-items:center;--video-progress:0;--video-buffered:0}
+.portfolio-video-player__timeline::before,.portfolio-video-player__buffer,.portfolio-video-player__played{content:"";position:absolute;left:0;top:8px;height:2px;border-radius:2px;pointer-events:none}
+.portfolio-video-player__timeline::before{right:0;background:rgba(255,255,255,.25)}
+.portfolio-video-player__buffer{width:calc(var(--video-buffered) * 100%);background:rgba(255,255,255,.42)}
+.portfolio-video-player__played{width:calc(var(--video-progress) * 100%);background:#f4f6f1}
+.portfolio-video-player__timeline input{position:relative;z-index:2;width:100%;height:18px;margin:0;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;touch-action:none}
+.portfolio-video-player__timeline input::-webkit-slider-runnable-track{height:18px;background:transparent}
+.portfolio-video-player__timeline input::-webkit-slider-thumb{width:10px;height:10px;margin-top:4px;-webkit-appearance:none;border:0;border-radius:50%;background:#f5f7f2;box-shadow:0 2px 8px rgba(0,0,0,.42)}
+.portfolio-video-player__timeline input::-moz-range-track{height:18px;background:transparent}
+.portfolio-video-player__timeline input::-moz-range-thumb{width:10px;height:10px;border:0;border-radius:50%;background:#f5f7f2;box-shadow:0 2px 8px rgba(0,0,0,.42)}
+.portfolio-video-player__control-row{display:flex;align-items:center;gap:13px;min-width:0}
+.portfolio-video-player__control-row button{flex:0 0 auto;padding:4px;border:0;background:transparent;color:#fff;font-size:10px;letter-spacing:.5px}
+.portfolio-video-player__time{font-size:9px;font-variant-numeric:tabular-nums;letter-spacing:.5px;color:rgba(255,255,255,.78);white-space:nowrap}
+.portfolio-video-player__volume{display:flex;align-items:center;gap:6px;margin-left:auto}
+.portfolio-video-player__volume input{width:68px;accent-color:#f3f5f0;cursor:pointer}
+.portfolio-video-player:fullscreen,.portfolio-video-player:-webkit-full-screen{width:100vw;height:100vh;border-radius:0;background:#000}
+.portfolio-video-player:fullscreen video,.portfolio-video-player:-webkit-full-screen video{object-fit:contain;background:#000}
+.card-swap-slot:not(.is-front) .portfolio-video-player__controls,.card-swap-slot:not(.is-front) .portfolio-video-player__center-play,.card-swap-slot:not(.is-front) .portfolio-video-player__loading{opacity:0;pointer-events:none}
+@keyframes videoLoading{to{transform:rotate(360deg)}}
+@media(max-width:700px){.portfolio-video-player__controls{padding:14px 12px 10px}.portfolio-video-player__volume input{display:none}.portfolio-video-player__control-row{gap:9px}.portfolio-video-player__time{font-size:8px}.portfolio-video-player__center-play{width:52px;height:52px}}
+@media(prefers-reduced-motion:reduce){.portfolio-video-player__loading{animation:none}}

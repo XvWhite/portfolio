@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import FlexCarousel from './FlexCarousel';
 import CardSwap, { Card } from './CardSwap';
+import PortfolioVideoPlayer from './PortfolioVideoPlayer';
 import galleries from '../gallery-data.json';
 import './ProjectGallery.css';
+
+const mediaSrc = path => import.meta.env.DEV ? `/videos/${path}` : `/media/${path}`;
 
 export const projectCover = project => {
   if (project.id === '01') return galleries.scene.find(item => item.source === '3.png').src;
@@ -15,16 +18,16 @@ export const projectCover = project => {
 
 const VIDEO_GROUPS = {
   '01': [
-    { title: 'NJ 01', subtitle: 'NANA JACQUELINE / FASHION FILM', src: '/videos/nj/nj-01.mp4', poster: '/images/video-posters/nj-01.jpg' },
-    { title: 'NJ 02', subtitle: 'NANA JACQUELINE / FASHION FILM', src: '/videos/nj/nj-02.mp4', poster: '/images/video-posters/nj-02.jpg' },
-    { title: 'NJ 03', subtitle: 'NANA JACQUELINE / FASHION FILM', src: '/videos/nj/nj-03.mp4', poster: '/images/video-posters/nj-03.jpg' },
-    { title: 'NJ 04', subtitle: 'NANA JACQUELINE / FASHION FILM', src: '/videos/nj/nj-04.mp4', poster: '/images/video-posters/nj-04.jpg' },
+    { title: 'NJ 01', subtitle: 'NANA JACQUELINE / FASHION FILM', src: mediaSrc('nj/nj-01.mp4'), poster: '/images/video-posters/nj-01.jpg' },
+    { title: 'NJ 02', subtitle: 'NANA JACQUELINE / FASHION FILM', src: mediaSrc('nj/nj-02.mp4'), poster: '/images/video-posters/nj-02.jpg' },
+    { title: 'NJ 03', subtitle: 'NANA JACQUELINE / FASHION FILM', src: mediaSrc('nj/nj-03.mp4'), poster: '/images/video-posters/nj-03.jpg' },
+    { title: 'NJ 04', subtitle: 'NANA JACQUELINE / FASHION FILM', src: mediaSrc('nj/nj-04.mp4'), poster: '/images/video-posters/nj-04.jpg' },
   ],
   '03': [
-    { title: 'TOPOSH 01', subtitle: '品牌珠宝展示视频', src: '/videos/toposh/toposh-01.mp4', poster: '/images/video-posters/toposh-01.jpg' },
-    { title: 'TOPOSH 02', subtitle: '品牌珠宝展示视频', src: '/videos/toposh/toposh-02.mp4', poster: '/images/video-posters/toposh-02.jpg' },
-    { title: 'TOPOSH 03', subtitle: '社交平台投放视频', src: '/videos/toposh/toposh-03.mp4', poster: '/images/video-posters/toposh-03.jpg' },
-    { title: 'TOPOSH 04', subtitle: '社交平台投放视频', src: '/videos/toposh/toposh-04.mp4', poster: '/images/video-posters/toposh-04.jpg' },
+    { title: 'TOPOSH 01', subtitle: '品牌珠宝展示视频', src: mediaSrc('toposh/toposh-01.mp4'), poster: '/images/video-posters/toposh-01.jpg' },
+    { title: 'TOPOSH 02', subtitle: '品牌珠宝展示视频', src: mediaSrc('toposh/toposh-02.mp4'), poster: '/images/video-posters/toposh-02.jpg' },
+    { title: 'TOPOSH 03', subtitle: '社交平台投放视频', src: mediaSrc('toposh/toposh-03.mp4'), poster: '/images/video-posters/toposh-03.jpg' },
+    { title: 'TOPOSH 04', subtitle: '社交平台投放视频', src: mediaSrc('toposh/toposh-04.mp4'), poster: '/images/video-posters/toposh-04.jpg' },
   ],
 };
 
@@ -49,7 +52,7 @@ const VIDEO_GROUP_DETAILS = {
 
 const VIDEO_DETAILS = {
   '04': {
-    src: '/videos/skills-ui/skills-ui.mp4',
+    src: mediaSrc('skills-ui/skills-ui.mp4'),
     poster: '/images/project-covers/skills-ui.webp',
     eyebrow: 'PRODUCT FILM / AI VIDEO',
     title: 'Skills UI 产品商业化宣传视频',
@@ -59,7 +62,7 @@ const VIDEO_DETAILS = {
     scope: ['脚本深化', 'AE 动态 UI', 'AI 实景创作', '剪辑与调色'],
   },
   stranger: {
-    src: '/videos/story/familiar-stranger.mp4',
+    src: mediaSrc('story/familiar-stranger.mp4'),
     poster: '/images/project-covers/narrative-film.webp',
     eyebrow: 'AI NARRATIVE FILM / PERSONAL PROJECT',
     title: '最熟悉的陌生人',
@@ -69,7 +72,7 @@ const VIDEO_DETAILS = {
     scope: ['剧本编写', '分镜设计', '资产制作', '视频生成', '剪辑后期'],
   },
   museum: {
-    src: '/videos/story/museum-night.mp4',
+    src: mediaSrc('story/museum-night.mp4'),
     poster: '/images/project-covers/narrative-film.webp',
     eyebrow: 'AI NARRATIVE FILM / TV PROJECT',
     title: '博物馆奇妙夜',
@@ -101,18 +104,10 @@ const GALLERY_DETAILS = {
 
 const initialGroup = id => id === '05' ? 'stranger' : id === '03' ? 'posters' : id === '01' ? 'scene' : 'main';
 
-function VideoPlayer({ index, title, subtitle, src, poster, large = false, preload = 'metadata', onPlay, onPause }) {
-  return <div className={`video-placeholder video-player${large ? ' video-placeholder--large' : ''}`}>
-    <video src={src} poster={poster} controls preload={preload} playsInline aria-label={`${title} 视频`} onPlay={onPlay} onPause={onPause} onEnded={onPause} />
-    <span className="video-placeholder__number">{String(index + 1).padStart(2, '0')}</span>
-    <div className="video-placeholder__label"><strong>{title}</strong><small>{subtitle || 'VIDEO'}</small></div>
-  </div>;
-}
-
 function VideoGrid({ project, onPlay, onPause }) {
   return <div className="video-grid" key={`${project.id}-videos`}>
     {VIDEO_GROUPS[project.id].map((video, index) => <article className="video-tile" key={video.title}>
-      <VideoPlayer index={index} {...video} preload="none" onPlay={onPlay} onPause={onPause} />
+      <PortfolioVideoPlayer {...video} preload="none" onPlay={onPlay} onPause={onPause} />
     </article>)}
   </div>;
 }
@@ -121,31 +116,12 @@ function VideoSwapFeature({ project, onPlay, onPause }) {
   const videos = VIDEO_GROUPS[project.id];
   const detail = VIDEO_GROUP_DETAILS[project.id];
   const [activeVideo, setActiveVideo] = useState(0);
-  const [playingVideo, setPlayingVideo] = useState(null);
-  const videoRefs = useRef([]);
-
-  useEffect(() => {
-    videoRefs.current.forEach((video, index) => {
-      if (!video) return;
-      if (index === activeVideo) {
-        video.muted = false;
-        video.volume = 1;
-        video.play().catch(() => {});
-      } else {
-        video.pause();
-      }
-    });
-  }, [activeVideo]);
 
   return <div className="video-swap-feature" key={`${project.id}-video-swap`}>
     <div className="video-swap-feature__deck">
       <CardSwap width={370} height={620} cardDistance={52} verticalDistance={6} depth={75} skewAmount={0} visibleCards={4} autoplay={false} pauseOnHover draggable speed={1} bounce={.5} parallax={.55} hoverSpread={.12} dim={.9} cardRadius={17} onChange={setActiveVideo}>
         {videos.map((video, index) => <Card key={video.title} className="video-swap-card">
-          <video ref={node => { videoRefs.current[index] = node; }} src={video.src} poster={video.poster} preload={index === 0 ? 'metadata' : 'none'} playsInline aria-label={`${video.title} 视频`} onPlay={event => { setPlayingVideo(index); onPlay(event); }} onPause={() => { setPlayingVideo(current => current === index ? null : current); onPause(); }} onEnded={() => { setPlayingVideo(current => current === index ? null : current); onPause(); }}/>
-          <div className="video-swap-card__actions">
-            <button type="button" aria-label={playingVideo === index ? `暂停 ${video.title}` : `播放 ${video.title}`} onClick={() => { const node = videoRefs.current[index]; if (!node) return; if (node.paused) node.play().catch(() => {}); else node.pause(); }}>{playingVideo === index ? 'Ⅱ' : '▶'}</button>
-            <button type="button" aria-label={`全屏播放 ${video.title}`} onClick={() => videoRefs.current[index]?.requestFullscreen?.()}>↗</button>
-          </div>
+          <PortfolioVideoPlayer {...video} active={index === activeVideo} autoPlay={index === activeVideo} preload={index === activeVideo ? 'metadata' : 'none'} onPlay={onPlay} onPause={onPause} />
         </Card>)}
       </CardSwap>
     </div>
@@ -157,14 +133,14 @@ function VideoSwapFeature({ project, onPlay, onPause }) {
       <p className="video-feature__description">{detail.description}</p>
       <div className="video-feature__meta"><span>ROLE</span><strong>{detail.role}</strong></div>
       <div className="video-feature__scope">{detail.scope.map(item => <span key={item}>{item}</span>)}</div>
-      <p className="video-swap-feature__gesture-hint">左右拖动视频卡片切换 · 顶层视频自动有声播放</p>
+      <p className="video-swap-feature__gesture-hint">左右拖动切换视频 · 上下滑动浏览项目介绍</p>
     </article>
   </div>;
 }
 
 function VideoFeature({ detail, onPlay, onPause }) {
   return <div className="video-feature" key={detail.title}>
-    <div className="video-feature__media"><VideoPlayer index={0} title={detail.title} subtitle="PLAY FILM" src={detail.src} poster={detail.poster} large onPlay={onPlay} onPause={onPause} /></div>
+    <div className="video-feature__media"><PortfolioVideoPlayer title={detail.title} src={detail.src} poster={detail.poster} onPlay={onPlay} onPause={onPause} /></div>
     <article className="video-feature__copy">
       <span className="video-feature__eyebrow">{detail.eyebrow}</span>
       <h3>{detail.title}</h3>

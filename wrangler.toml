@@ -1,0 +1,7 @@
+name = "xvwhite"
+compatibility_date = "2026-10-15"
+pages_build_output_dir = "./dist"
+
+[[r2_buckets]]
+binding = "PORTFOLIO_MEDIA"
+bucket_name = "xvwhite-portfolio-media"
