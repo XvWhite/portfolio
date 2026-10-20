@@ -28,7 +28,7 @@
 .flip-card[data-disabled]{cursor:default;opacity:.6}
 .flip-card[role='button']{cursor:pointer}
 .flip-card__shadow{position:absolute;inset:10% 7% -4%;border-radius:var(--fc-radius);background:color-mix(in srgb,var(--fc-shadow) calc(var(--fc-shadow-o) * 100%),transparent);filter:blur(25px);pointer-events:none}
-.flip-card__rotor{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform;transition:transform .48s cubic-bezier(.2,.75,.25,1)}
+.flip-card__rotor{position:absolute;inset:0;border-radius:var(--fc-radius);transform-style:preserve-3d;will-change:transform;transition:transform .48s cubic-bezier(.2,.75,.25,1)}
 .flip-card[data-tilting] .flip-card__rotor{transition-duration:.12s;transition-timing-function:ease-out}
 .flip-card__face{position:absolute;inset:0;overflow:hidden;border-radius:var(--fc-radius);background:var(--fc-bg);color:var(--fc-ink);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .flip-card__face img{-webkit-user-drag:none}

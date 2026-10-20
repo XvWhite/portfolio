@@ -40,7 +40,7 @@
   z-index:0;
   pointer-events:none;
   opacity:0;
-  border-radius:inherit;
+  border-radius:calc(var(--fc-radius) + 2px);
   box-shadow:
     0 0 0 1px var(--project-glow),
     0 0 24px -4px var(--project-glow),

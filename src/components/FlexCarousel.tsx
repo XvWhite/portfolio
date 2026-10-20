@@ -841,6 +841,7 @@ const FlexCarousel = ({
 
       const m = metrics(s);
       const n = slots.length;
+      const compactView = width <= 700;
       let animating = false;
 
       if (resnap) {
@@ -1086,10 +1087,15 @@ const FlexCarousel = ({
         const inner = Math.max(4, s.reach * (spanW + spanH) * 0.5);
         lensUniforms.uInner.value = inner;
         lensUniforms.uOuter.value = inner * 1.6;
-        lensUniforms.uFlow.value = s.bend * (spanW + spanH) * 0.45;
+        // On narrow screens the refracted neighbouring cards can fold over the
+        // active image. Keep the carousel and drag interaction, but render the
+        // reel flat so every image retains a clean, separate silhouette.
+        lensUniforms.uFlow.value = compactView ? 0 : s.bend * (spanW + spanH) * 0.45;
         lensUniforms.uCurl.value = s.curl === 'rise' ? 1 : s.curl === 'fall' ? -1 : 0;
-        lensUniforms.uDispersion.value = s.dispersion * 0.12 * (1 + Math.abs(deform) * liquidAmount * 1.2);
-        lensUniforms.uStrength.value = effects.strength * (1 - focusEase);
+        lensUniforms.uDispersion.value = compactView
+          ? 0
+          : s.dispersion * 0.12 * (1 + Math.abs(deform) * liquidAmount * 1.2);
+        lensUniforms.uStrength.value = compactView ? 0 : effects.strength * (1 - focusEase);
         lensUniforms.uSceneAlpha.value = effects.sceneAlpha;
         lensUniforms.uFlatRect.value = activeDraw
           ? [activeDraw.x, activeDraw.y, activeDraw.cw / 2, activeDraw.ch / 2]
