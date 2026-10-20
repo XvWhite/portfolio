@@ -83,6 +83,25 @@ const VIDEO_DETAILS = {
   },
 };
 
+const DAYDREAM_ITEMS = [
+  {
+    src: mediaSrc('story/urban-daydream-01.mp4'),
+    poster: '/images/video-posters/story/urban-daydream-01.jpg',
+    description: '当耳机中播放起 colt.45，我穿越到了西部世界。',
+    achievement: '作品发布后获得 85.7 万播放、2.7 万点赞与 4344 次分享，获得平台 45 万流量激励，进入相关挑战榜 TOP 36。',
+    stats: '857K VIEWS · 27K LIKES · 4.3K SHARES',
+    evidence: [
+      { src: '/images/evidence/urban-daydream-engagement.png', alt: '《都市白日梦》作品播放与互动数据证明' },
+      { src: '/images/evidence/urban-daydream-top36.png', alt: '《都市白日梦》进入挑战榜 TOP 36 的平台证明' },
+    ],
+  },
+  {
+    src: mediaSrc('story/urban-daydream-02.mp4'),
+    poster: '/images/video-posters/story/urban-daydream-02.jpg',
+    description: '量房走神的一瞬间，我的思绪穿越到了未来战场。',
+  },
+];
+
 const GALLERY_DETAILS = {
   '01-scene': {
     eyebrow: 'SCENE PORTRAITS / ART DIRECTION',
@@ -148,6 +167,66 @@ function VideoFeature({ detail, onPlay, onPause }) {
       <p className="video-feature__description">{detail.description}</p>
       <div className="video-feature__meta"><span>ROLE</span><strong>{detail.role}</strong></div>
       <div className="video-feature__scope">{detail.scope.map(item => <span key={item}>{item}</span>)}</div>
+    </article>
+  </div>;
+}
+
+function DaydreamFeature({ onPlay, onPause }) {
+  const [activeItem, setActiveItem] = useState(0);
+  const item = DAYDREAM_ITEMS[activeItem];
+
+  function switchItem(direction) {
+    setActiveItem(current => (current + direction + DAYDREAM_ITEMS.length) % DAYDREAM_ITEMS.length);
+  }
+
+  return <div className="daydream-feature">
+    <div className="daydream-feature__visual">
+      <div className="daydream-feature__media" key={`daydream-video-${activeItem}`}>
+        <PortfolioVideoPlayer
+          src={item.src}
+          poster={item.poster}
+          title="《都市白日梦》"
+          preload="metadata"
+          onPlay={onPlay}
+          onPause={onPause}
+        />
+        <span className="daydream-feature__video-number">VIDEO / {String(activeItem + 1).padStart(2, '0')}</span>
+      </div>
+      <div className="daydream-feature__navigation">
+        <div className="daydream-feature__arrows">
+          <button type="button" onClick={() => switchItem(-1)} aria-label="切换至上一条《都市白日梦》视频">←</button>
+          <button type="button" onClick={() => switchItem(1)} aria-label="切换至下一条《都市白日梦》视频">→</button>
+        </div>
+        <span aria-live="polite">{String(activeItem + 1).padStart(2, '0')} / {String(DAYDREAM_ITEMS.length).padStart(2, '0')}</span>
+      </div>
+    </div>
+
+    <article className="video-feature__copy daydream-feature__copy" key={`daydream-copy-${activeItem}`}>
+      <span className="video-feature__eyebrow">URBAN DAYDREAMS / AI NARRATIVE SHORTS</span>
+      <h3>《都市白日梦》</h3>
+      <p className="video-feature__lead">喧闹的都市里，身体仍在重复日常，思绪却在某个走神的瞬间脱离现实，漂向未知的时空。</p>
+      <p className="video-feature__description">《都市白日梦》是一组由我独立完成的 AI 叙事短片。我从日常生活中的短暂失神出发，将音乐、空间与想象转化为不同的幻想世界，独立完成创意构思、脚本分镜、视觉设计、AI 素材生成及后期剪辑。</p>
+
+      <div className="daydream-feature__current">
+        <span>FILM {String(activeItem + 1).padStart(2, '0')}</span>
+        <p>{item.description}</p>
+      </div>
+
+      {item.achievement && <section className="daydream-feature__achievement">
+        <span>{item.stats}</span>
+        <p>{item.achievement}</p>
+        <div className="daydream-feature__evidence" aria-label="作品数据证明">
+          {item.evidence.map((evidence, index) => <figure key={evidence.src}>
+            <img src={evidence.src} alt={evidence.alt} loading="lazy" decoding="async" />
+            <figcaption>PLATFORM RECORD · {String(index + 1).padStart(2, '0')}</figcaption>
+          </figure>)}
+        </div>
+      </section>}
+
+      <div className="video-feature__meta"><span>ROLE</span><strong>个人独立创作</strong></div>
+      <div className="video-feature__scope">
+        {['创意构思', '脚本分镜', 'AI 视觉生成', '视频制作', '剪辑后期'].map(scope => <span key={scope}>{scope}</span>)}
+      </div>
     </article>
   </div>;
 }
@@ -220,7 +299,7 @@ export default function ProjectGallery({ project, onClose }) {
     : project.id === '03'
       ? [['posters', '品牌海报', galleries.toposh.length], ['videos', '视频', 4]]
       : project.id === '05'
-        ? [['stranger', '最熟悉的陌生人'], ['museum', '博物馆奇妙夜']]
+        ? [['stranger', '最熟悉的陌生人'], ['museum', '博物馆奇妙夜'], ['daydream', '都市白日梦']]
         : [];
 
   return <dialog ref={dialog} className="project-gallery" data-closing={closing ? '' : undefined} data-video-playing={videoPlaying ? '' : undefined} aria-label={`${project.title} 作品详情`} onCancel={event => { event.preventDefault(); if (zoomed) setZoomed(null); else requestClose(); }}>
@@ -237,6 +316,7 @@ export default function ProjectGallery({ project, onClose }) {
     <div className={`gallery-stage${isImageGallery ? '' : ' gallery-stage--video'}`} ref={stage}>
       {isImageGallery && <FlexCarousel key={group} items={items} preset="ribbon" intro="deal" fit="natural" cardHeight={0.70} gap={28} squeeze={0} bend={0.12} dispersion={0.08} focusOnClick={false} captions={false} onChange={index => setCurrent(index)} onSelect={(_, item) => setZoomed(item)} />}
       {!isImageGallery && (project.id === '01' || project.id === '03') && <VideoSwapFeature project={project} onPlay={handleVideoPlay} onPause={handleVideoPause} />}
+      {!isImageGallery && group === 'daydream' && project.id === '05' && <DaydreamFeature onPlay={handleVideoPlay} onPause={handleVideoPause} />}
       {!isImageGallery && detail && <VideoFeature detail={detail} onPlay={handleVideoPlay} onPause={handleVideoPause} />}
     </div>
 
