@@ -29,6 +29,7 @@ export default function PortfolioVideoPlayer({
   const [buffered, setBuffered] = useState(0);
   const [volume, setVolume] = useState(1);
   const [muted, setMuted] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const [retryKey, setRetryKey] = useState(0);
@@ -81,6 +82,26 @@ export default function PortfolioVideoPlayer({
     };
   }, [active, autoPlay, retryKey, src]);
 
+  useEffect(() => {
+    const node = video.current;
+    const syncFullscreen = () => {
+      const element = document.fullscreenElement || document.webkitFullscreenElement;
+      setFullscreen(element === root.current);
+    };
+    const enterNativeFullscreen = () => setFullscreen(true);
+    const leaveNativeFullscreen = () => setFullscreen(false);
+    document.addEventListener('fullscreenchange', syncFullscreen);
+    document.addEventListener('webkitfullscreenchange', syncFullscreen);
+    node?.addEventListener('webkitbeginfullscreen', enterNativeFullscreen);
+    node?.addEventListener('webkitendfullscreen', leaveNativeFullscreen);
+    return () => {
+      document.removeEventListener('fullscreenchange', syncFullscreen);
+      document.removeEventListener('webkitfullscreenchange', syncFullscreen);
+      node?.removeEventListener('webkitbeginfullscreen', enterNativeFullscreen);
+      node?.removeEventListener('webkitendfullscreen', leaveNativeFullscreen);
+    };
+  }, []);
+
   const syncTimeline = event => {
     const node = event.currentTarget;
     const nextDuration = Number.isFinite(node.duration) ? node.duration : 0;
@@ -123,15 +144,19 @@ export default function PortfolioVideoPlayer({
     setMuted(node.muted);
   };
 
-  const enterFullscreen = async () => {
+  const toggleFullscreen = async () => {
     const container = root.current;
     const node = video.current;
     try {
-      if (container?.requestFullscreen) await container.requestFullscreen();
+      const element = document.fullscreenElement || document.webkitFullscreenElement;
+      if (element) {
+        if (document.exitFullscreen) await document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      } else if (container?.requestFullscreen) await container.requestFullscreen();
       else if (container?.webkitRequestFullscreen) container.webkitRequestFullscreen();
       else if (node?.webkitEnterFullscreen) node.webkitEnterFullscreen();
     } catch {
-      node?.webkitEnterFullscreen?.();
+      if (!fullscreen) node?.webkitEnterFullscreen?.();
     }
   };
 
@@ -181,7 +206,7 @@ export default function PortfolioVideoPlayer({
           <button type="button" onClick={toggleMute} aria-label={muted ? '取消静音' : '静音'}>{muted || volume === 0 ? '静音' : '音量'}</button>
           <input type="range" min="0" max="1" step="0.05" value={muted ? 0 : volume} onChange={changeVolume} aria-label="音量" />
         </div>
-        <button type="button" onClick={enterFullscreen} aria-label={`全屏播放 ${title}`}>全屏</button>
+        <button type="button" onClick={toggleFullscreen} aria-label={fullscreen ? `退出全屏 ${title}` : `全屏播放 ${title}`}>{fullscreen ? '退出全屏' : '全屏'}</button>
       </div>
     </div>
   </div>;

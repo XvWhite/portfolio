@@ -171,7 +171,7 @@ function VideoFeature({ detail, onPlay, onPause }) {
   </div>;
 }
 
-function DaydreamFeature({ onPlay, onPause }) {
+function DaydreamFeature({ onPlay, onPause, onZoom }) {
   const [activeItem, setActiveItem] = useState(0);
   const item = DAYDREAM_ITEMS[activeItem];
 
@@ -217,7 +217,9 @@ function DaydreamFeature({ onPlay, onPause }) {
         <p>{item.achievement}</p>
         <div className="daydream-feature__evidence" aria-label="作品数据证明">
           {item.evidence.map((evidence, index) => <figure key={evidence.src}>
-            <img src={evidence.src} alt={evidence.alt} loading="lazy" decoding="async" />
+            <button type="button" onClick={() => onZoom(evidence)} aria-label={`查看大图：${evidence.alt}`}>
+              <img src={evidence.src} alt={evidence.alt} loading="lazy" decoding="async" />
+            </button>
             <figcaption>PLATFORM RECORD · {String(index + 1).padStart(2, '0')}</figcaption>
           </figure>)}
         </div>
@@ -235,9 +237,12 @@ export default function ProjectGallery({ project, onClose }) {
   const dialog = useRef(null);
   const stage = useRef(null);
   const closeTimer = useRef(null);
+  const fullscreenExitedAt = useRef(-Infinity);
   const [group, setGroup] = useState(initialGroup(project.id));
   const [current, setCurrent] = useState(0);
   const [zoomed, setZoomed] = useState(null);
+  const [zoomScale, setZoomScale] = useState(1);
+  const [zoomOrigin, setZoomOrigin] = useState('50% 50%');
   const [closing, setClosing] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
 
@@ -263,6 +268,18 @@ export default function ProjectGallery({ project, onClose }) {
     };
   }, []);
 
+  useEffect(() => {
+    const rememberFullscreenExit = () => {
+      if (!(document.fullscreenElement || document.webkitFullscreenElement)) fullscreenExitedAt.current = performance.now();
+    };
+    document.addEventListener('fullscreenchange', rememberFullscreenExit);
+    document.addEventListener('webkitfullscreenchange', rememberFullscreenExit);
+    return () => {
+      document.removeEventListener('fullscreenchange', rememberFullscreenExit);
+      document.removeEventListener('webkitfullscreenchange', rememberFullscreenExit);
+    };
+  }, []);
+
   function requestClose() {
     if (closing) return;
     setClosing(true);
@@ -276,6 +293,41 @@ export default function ProjectGallery({ project, onClose }) {
     setCurrent(0);
     setZoomed(null);
     setVideoPlaying(false);
+  }
+
+  function openZoom(item) {
+    setZoomScale(1);
+    setZoomOrigin('50% 50%');
+    setZoomed(item);
+  }
+
+  function closeZoom() {
+    setZoomed(null);
+    setZoomScale(1);
+    setZoomOrigin('50% 50%');
+  }
+
+  function handleZoomWheel(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+    setZoomOrigin(`${Math.max(0, Math.min(100, x))}% ${Math.max(0, Math.min(100, y))}%`);
+    setZoomScale(scale => Math.max(1, Math.min(4, scale - event.deltaY * .0015)));
+  }
+
+  function handleDialogCancel(event) {
+    event.preventDefault();
+    const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
+    if (fullscreenElement) {
+      if (document.exitFullscreen) document.exitFullscreen();
+      else document.webkitExitFullscreen?.();
+      return;
+    }
+    if (performance.now() - fullscreenExitedAt.current < 450) return;
+    if (zoomed) closeZoom();
+    else requestClose();
   }
 
   function handleVideoPlay(event) {
@@ -302,7 +354,7 @@ export default function ProjectGallery({ project, onClose }) {
         ? [['stranger', '最熟悉的陌生人'], ['museum', '博物馆奇妙夜'], ['daydream', '都市白日梦']]
         : [];
 
-  return <dialog ref={dialog} className="project-gallery" data-closing={closing ? '' : undefined} data-video-playing={videoPlaying ? '' : undefined} aria-label={`${project.title} 作品详情`} onCancel={event => { event.preventDefault(); if (zoomed) setZoomed(null); else requestClose(); }}>
+  return <dialog ref={dialog} className="project-gallery" data-closing={closing ? '' : undefined} data-video-playing={videoPlaying ? '' : undefined} aria-label={`${project.title} 作品详情`} onCancel={handleDialogCancel}>
     <div className={`gallery-ambience${selected ? '' : ' gallery-ambience--video'}`} aria-hidden="true" style={selected ? { backgroundImage: `url("${selected.src}")` } : undefined} />
     <div className="gallery-shade" aria-hidden="true" />
     <header className="gallery-header">
@@ -314,9 +366,9 @@ export default function ProjectGallery({ project, onClose }) {
     </header>
 
     <div className={`gallery-stage${isImageGallery ? '' : ' gallery-stage--video'}`} ref={stage}>
-      {isImageGallery && <FlexCarousel key={group} items={items} preset="ribbon" intro="deal" fit="natural" cardHeight={0.70} gap={28} squeeze={0} bend={0.12} dispersion={0.08} focusOnClick={false} captions={false} onChange={index => setCurrent(index)} onSelect={(_, item) => setZoomed(item)} />}
+      {isImageGallery && <FlexCarousel key={group} items={items} preset="ribbon" intro="deal" fit="natural" cardHeight={0.70} gap={28} squeeze={0} bend={0.12} dispersion={0.08} focusOnClick={false} captions={false} onChange={index => setCurrent(index)} onSelect={(_, item) => openZoom(item)} />}
       {!isImageGallery && (project.id === '01' || project.id === '03') && <VideoSwapFeature project={project} onPlay={handleVideoPlay} onPause={handleVideoPause} />}
-      {!isImageGallery && group === 'daydream' && project.id === '05' && <DaydreamFeature onPlay={handleVideoPlay} onPause={handleVideoPause} />}
+      {!isImageGallery && group === 'daydream' && project.id === '05' && <DaydreamFeature onPlay={handleVideoPlay} onPause={handleVideoPause} onZoom={openZoom} />}
       {!isImageGallery && detail && <VideoFeature detail={detail} onPlay={handleVideoPlay} onPause={handleVideoPause} />}
     </div>
 
@@ -330,9 +382,10 @@ export default function ProjectGallery({ project, onClose }) {
     </footer>}
     {!isImageGallery && <footer className="gallery-footer gallery-footer--video"><span>VIDEO WORK · FULL PREVIEW</span><small>点击画面播放 · 支持全屏观看</small></footer>}
 
-    {zoomed && <div className="gallery-zoom" role="dialog" aria-modal="true" aria-label={`${zoomed.alt || zoomed.title} 大图`} onClick={() => setZoomed(null)}>
-      <img src={zoomed.src} alt={zoomed.alt || zoomed.title || '作品大图'} decoding="async" onClick={event => event.stopPropagation()} />
-      <button onClick={() => setZoomed(null)} aria-label="关闭大图">关闭 <span>×</span></button>
+    {zoomed && <div className="gallery-zoom" data-zoomed={zoomScale > 1 ? '' : undefined} role="dialog" aria-modal="true" aria-label={`${zoomed.alt || zoomed.title} 大图`} onClick={closeZoom}>
+      <img src={zoomed.src} alt={zoomed.alt || zoomed.title || '作品大图'} decoding="async" style={{ transform: `scale(${zoomScale})`, transformOrigin: zoomOrigin }} onWheel={handleZoomWheel} onClick={event => event.stopPropagation()} />
+      <div className="gallery-zoom__status" aria-live="polite"><span>滚轮缩放</span><strong>{Math.round(zoomScale * 100)}%</strong></div>
+      <button onClick={closeZoom} aria-label="关闭大图">关闭 <span>×</span></button>
     </div>}
   </dialog>;
 }
