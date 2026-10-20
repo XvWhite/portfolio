@@ -33,11 +33,11 @@
   --project-glow:rgba(210,225,204,.55);
 }
 
-.project-shell::before{
+.project-shell .flip-card__rotor::before{
   content:"";
   position:absolute;
   inset:-2px;
-  z-index:-1;
+  z-index:0;
   pointer-events:none;
   opacity:0;
   border-radius:inherit;
@@ -56,9 +56,10 @@
     transform .7s cubic-bezier(.2,.75,.25,1);
 }
 
-.project-shell:hover::before,
-.project-shell:focus-visible::before,
-.project-shell:focus-within::before{
+.project-shell .flip-card__face{z-index:1}
+.project-shell:hover .flip-card__rotor::before,
+.project-shell:focus-visible .flip-card__rotor::before,
+.project-shell:focus-within .flip-card__rotor::before{
   opacity:1;
   filter:blur(1px);
 }
@@ -78,5 +79,5 @@
 
 @media (hover:none),(prefers-reduced-motion:reduce){
   .project-image img{filter:none}
-  .project-shell::before{display:none}
+  .project-shell .flip-card__rotor::before{display:none}
 }

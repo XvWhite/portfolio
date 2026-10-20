@@ -123,6 +123,58 @@ const GALLERY_DETAILS = {
 
 const initialGroup = id => id === '05' ? 'stranger' : id === '03' ? 'posters' : id === '01' ? 'scene' : 'main';
 
+function GalleryAmbience({ src }) {
+  const [layers, setLayers] = useState(() => [src || null, null]);
+  const [activeLayer, setActiveLayer] = useState(0);
+  const activeLayerRef = useRef(0);
+  const displayedSrc = useRef(src);
+  const revealFrame = useRef(0);
+
+  useEffect(() => {
+    if (!src || src === displayedSrc.current) return undefined;
+    let cancelled = false;
+    let committed = false;
+    const image = new Image();
+
+    const reveal = () => {
+      if (cancelled || committed || !image.naturalWidth) return;
+      committed = true;
+      const nextLayer = activeLayerRef.current === 0 ? 1 : 0;
+      setLayers(previous => previous.map((value, index) => index === nextLayer ? src : value));
+      revealFrame.current = requestAnimationFrame(() => {
+        revealFrame.current = requestAnimationFrame(() => {
+          if (cancelled) return;
+          activeLayerRef.current = nextLayer;
+          displayedSrc.current = src;
+          setActiveLayer(nextLayer);
+        });
+      });
+    };
+
+    image.decoding = 'async';
+    image.onload = reveal;
+    image.src = src;
+    if (image.complete) reveal();
+    image.decode?.().then(reveal).catch(() => {});
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(revealFrame.current);
+      image.onload = null;
+    };
+  }, [src]);
+
+  if (!src) return <div className="gallery-ambience gallery-ambience--video" aria-hidden="true" />;
+
+  return <div className="gallery-ambience-stack" aria-hidden="true">
+    {layers.map((layer, index) => <div
+      className={`gallery-ambience-layer${index === activeLayer ? ' is-active' : ''}`}
+      key={index}
+      style={layer ? { backgroundImage: `url("${layer}")` } : undefined}
+    />)}
+  </div>;
+}
+
 function VideoGrid({ project, onPlay, onPause }) {
   return <div className="video-grid" key={`${project.id}-videos`}>
     {VIDEO_GROUPS[project.id].map((video, index) => <article className="video-tile" key={video.title}>
@@ -432,7 +484,7 @@ export default function ProjectGallery({ project, onClose }) {
         : [];
 
   return <dialog ref={dialog} className="project-gallery" data-closing={closing ? '' : undefined} data-video-playing={videoPlaying ? '' : undefined} aria-label={`${project.title} 作品详情`} onCancel={handleDialogCancel}>
-    <div className={`gallery-ambience${selected ? '' : ' gallery-ambience--video'}`} aria-hidden="true" style={selected ? { backgroundImage: `url("${selected.src}")` } : undefined} />
+    <GalleryAmbience src={selected?.src} />
     <div className="gallery-shade" aria-hidden="true" />
     <header className="gallery-header">
       <div className="gallery-heading"><span>SELECTED WORK</span><h2>{project.title}</h2></div>

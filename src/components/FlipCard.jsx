@@ -97,8 +97,8 @@ export default function FlipCard({
       '--fc-shadow-o': shadowOpacity,
     }}
   >
-    {shadow && <span className="flip-card__shadow" aria-hidden="true" />}
     <div ref={rotorRef} className="flip-card__rotor">
+      {shadow && <span className="flip-card__shadow" aria-hidden="true" />}
       <div className="flip-card__face flip-card__face--front">{front}</div>
     </div>
   </div>;
