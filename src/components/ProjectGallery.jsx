@@ -73,7 +73,7 @@ const VIDEO_DETAILS = {
   },
   museum: {
     src: mediaSrc('story/museum-night.mp4'),
-    poster: '/images/project-covers/narrative-film.webp',
+    poster: '/images/video-posters/story/museum-night.jpg',
     eyebrow: 'AI NARRATIVE FILM / TV PROJECT',
     title: '博物馆奇妙夜',
     lead: '中秋之夜，一束月光照进非遗博物馆，今晚是个狂欢夜。',
@@ -85,7 +85,7 @@ const VIDEO_DETAILS = {
 
 const DAYDREAM_ITEMS = [
   {
-    src: mediaSrc('story/urban-daydream-01.mp4'),
+    src: mediaSrc('story/urban-daydream-01-v2.mp4'),
     poster: '/images/video-posters/story/urban-daydream-01.jpg',
     description: '当耳机中播放起 colt.45，我穿越到了西部世界。',
     achievement: '作品发布后获得 85.7 万播放、2.7 万点赞与 4344 次分享，获得平台 45 万流量激励，进入相关挑战榜 TOP 36。',
@@ -96,7 +96,7 @@ const DAYDREAM_ITEMS = [
     ],
   },
   {
-    src: mediaSrc('story/urban-daydream-02.mp4'),
+    src: mediaSrc('story/urban-daydream-02-v2.mp4'),
     poster: '/images/video-posters/story/urban-daydream-02.jpg',
     description: '量房走神的一瞬间，我的思绪穿越到了未来战场。',
   },
@@ -236,13 +236,17 @@ function DaydreamFeature({ onPlay, onPause, onZoom }) {
 export default function ProjectGallery({ project, onClose }) {
   const dialog = useRef(null);
   const stage = useRef(null);
+  const zoomLayer = useRef(null);
+  const zoomImage = useRef(null);
+  const zoomDrag = useRef(null);
   const closeTimer = useRef(null);
   const fullscreenExitedAt = useRef(-Infinity);
   const [group, setGroup] = useState(initialGroup(project.id));
   const [current, setCurrent] = useState(0);
   const [zoomed, setZoomed] = useState(null);
   const [zoomScale, setZoomScale] = useState(1);
-  const [zoomOrigin, setZoomOrigin] = useState('50% 50%');
+  const [zoomOffset, setZoomOffset] = useState({ x: 0, y: 0 });
+  const [zoomDragging, setZoomDragging] = useState(false);
   const [closing, setClosing] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(false);
 
@@ -297,25 +301,98 @@ export default function ProjectGallery({ project, onClose }) {
 
   function openZoom(item) {
     setZoomScale(1);
-    setZoomOrigin('50% 50%');
+    setZoomOffset({ x: 0, y: 0 });
+    setZoomDragging(false);
+    zoomDrag.current = null;
     setZoomed(item);
   }
 
   function closeZoom() {
     setZoomed(null);
     setZoomScale(1);
-    setZoomOrigin('50% 50%');
+    setZoomOffset({ x: 0, y: 0 });
+    setZoomDragging(false);
+    zoomDrag.current = null;
+  }
+
+  function clampZoomOffset(offset, scale = zoomScale) {
+    const layer = zoomLayer.current;
+    const image = zoomImage.current;
+    if (!layer || !image || scale <= 1) return { x: 0, y: 0 };
+    const styles = getComputedStyle(layer);
+    const availableWidth = Math.max(1, layer.clientWidth - parseFloat(styles.paddingLeft) - parseFloat(styles.paddingRight));
+    const availableHeight = Math.max(1, layer.clientHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom));
+    const maxX = Math.max(0, (image.offsetWidth * scale - availableWidth) / 2);
+    const maxY = Math.max(0, (image.offsetHeight * scale - availableHeight) / 2);
+    return {
+      x: Math.max(-maxX, Math.min(maxX, offset.x)),
+      y: Math.max(-maxY, Math.min(maxY, offset.y)),
+    };
   }
 
   function handleZoomWheel(event) {
     event.preventDefault();
     event.stopPropagation();
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
-    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
-    setZoomOrigin(`${Math.max(0, Math.min(100, x))}% ${Math.max(0, Math.min(100, y))}%`);
-    setZoomScale(scale => Math.max(1, Math.min(4, scale - event.deltaY * .0015)));
+    const image = zoomImage.current;
+    if (!image) return;
+    const nextScale = Math.max(1, Math.min(4, zoomScale - event.deltaY * .0015));
+    if (nextScale === zoomScale) return;
+    const imageBounds = image.getBoundingClientRect();
+    const visualCenterX = imageBounds.left + imageBounds.width / 2;
+    const visualCenterY = imageBounds.top + imageBounds.height / 2;
+    const baseCenterX = visualCenterX - zoomOffset.x;
+    const baseCenterY = visualCenterY - zoomOffset.y;
+    const ratio = nextScale / zoomScale;
+    const anchoredOffset = {
+      x: event.clientX - baseCenterX - (event.clientX - baseCenterX - zoomOffset.x) * ratio,
+      y: event.clientY - baseCenterY - (event.clientY - baseCenterY - zoomOffset.y) * ratio,
+    };
+    setZoomScale(nextScale);
+    setZoomOffset(clampZoomOffset(anchoredOffset, nextScale));
   }
+
+  function handleZoomPointerDown(event) {
+    event.stopPropagation();
+    if (zoomScale <= 1 || (event.pointerType === 'mouse' && event.button !== 0)) return;
+    event.preventDefault();
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+    zoomDrag.current = {
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      originX: zoomOffset.x,
+      originY: zoomOffset.y,
+    };
+    setZoomDragging(true);
+  }
+
+  function handleZoomPointerMove(event) {
+    const drag = zoomDrag.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    event.preventDefault();
+    event.stopPropagation();
+    setZoomOffset(clampZoomOffset({
+      x: drag.originX + event.clientX - drag.startX,
+      y: drag.originY + event.clientY - drag.startY,
+    }));
+  }
+
+  function endZoomDrag(event) {
+    const drag = zoomDrag.current;
+    if (!drag || drag.pointerId !== event.pointerId) return;
+    event.preventDefault();
+    event.stopPropagation();
+    event.currentTarget.releasePointerCapture?.(event.pointerId);
+    zoomDrag.current = null;
+    setZoomDragging(false);
+  }
+
+  useEffect(() => {
+    if (!zoomed) return undefined;
+    const keepInBounds = () => setZoomOffset(offset => clampZoomOffset(offset, zoomScale));
+    window.addEventListener('resize', keepInBounds);
+    return () => window.removeEventListener('resize', keepInBounds);
+  }, [zoomed, zoomScale]);
 
   function handleDialogCancel(event) {
     event.preventDefault();
@@ -382,9 +459,9 @@ export default function ProjectGallery({ project, onClose }) {
     </footer>}
     {!isImageGallery && <footer className="gallery-footer gallery-footer--video"><span>VIDEO WORK · FULL PREVIEW</span><small>点击画面播放 · 支持全屏观看</small></footer>}
 
-    {zoomed && <div className="gallery-zoom" data-zoomed={zoomScale > 1 ? '' : undefined} role="dialog" aria-modal="true" aria-label={`${zoomed.alt || zoomed.title} 大图`} onClick={closeZoom}>
-      <img src={zoomed.src} alt={zoomed.alt || zoomed.title || '作品大图'} decoding="async" style={{ transform: `scale(${zoomScale})`, transformOrigin: zoomOrigin }} onWheel={handleZoomWheel} onClick={event => event.stopPropagation()} />
-      <div className="gallery-zoom__status" aria-live="polite"><span>滚轮缩放</span><strong>{Math.round(zoomScale * 100)}%</strong></div>
+    {zoomed && <div ref={zoomLayer} className="gallery-zoom" data-zoomed={zoomScale > 1 ? '' : undefined} data-dragging={zoomDragging ? '' : undefined} role="dialog" aria-modal="true" aria-label={`${zoomed.alt || zoomed.title} 大图`} onWheel={handleZoomWheel} onClick={closeZoom}>
+      <img ref={zoomImage} src={zoomed.src} alt={zoomed.alt || zoomed.title || '作品大图'} decoding="async" draggable="false" style={{ transform: `translate3d(${zoomOffset.x}px, ${zoomOffset.y}px, 0) scale(${zoomScale})` }} onPointerDown={handleZoomPointerDown} onPointerMove={handleZoomPointerMove} onPointerUp={endZoomDrag} onPointerCancel={endZoomDrag} onClick={event => event.stopPropagation()} />
+      <div className="gallery-zoom__status" aria-live="polite"><span>{zoomScale > 1 ? '拖动查看 · 滚轮缩放' : '滚轮缩放'}</span><strong>{Math.round(zoomScale * 100)}%</strong></div>
       <button onClick={closeZoom} aria-label="关闭大图">关闭 <span>×</span></button>
     </div>}
   </dialog>;

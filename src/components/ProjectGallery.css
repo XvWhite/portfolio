@@ -87,9 +87,10 @@ dialog.project-gallery{position:fixed;inset:0;width:100vw;max-width:none;height:
 .daydream-feature__copy .video-feature__meta{margin-top:22px}
 .daydream-feature__copy .video-feature__scope{margin-top:16px}
 
-.gallery-zoom{position:absolute;inset:0;z-index:10;display:grid;place-items:center;padding:72px 6vw 50px;background:#050606e8;backdrop-filter:blur(22px);cursor:zoom-out;animation:galleryZoomIn .3s ease both}
-.gallery-zoom img{display:block;width:auto;height:auto;max-width:88vw;max-height:84dvh;object-fit:contain;filter:drop-shadow(0 24px 70px #000a);cursor:zoom-in;transition:transform .12s ease-out;will-change:transform}
-.gallery-zoom[data-zoomed] img{cursor:zoom-out}
+.gallery-zoom{position:absolute;inset:0;z-index:10;display:grid;place-items:center;overflow:hidden;padding:72px 6vw 50px;background:#050606e8;backdrop-filter:blur(22px);cursor:zoom-out;animation:galleryZoomIn .3s ease both}
+.gallery-zoom img{display:block;width:auto;height:auto;max-width:88vw;max-height:84dvh;object-fit:contain;filter:drop-shadow(0 24px 70px #000a);cursor:zoom-in;transition:transform .12s ease-out;will-change:transform;user-select:none;-webkit-user-drag:none;touch-action:none}
+.gallery-zoom[data-zoomed] img{cursor:grab}
+.gallery-zoom[data-dragging] img{cursor:grabbing;transition:none}
 .gallery-zoom__status{position:absolute;left:46px;bottom:28px;display:flex;align-items:center;gap:14px;color:#ffffff68;font-size:9px;letter-spacing:1.2px;pointer-events:none}.gallery-zoom__status strong{color:#fff;font-size:10px;font-weight:400;font-variant-numeric:tabular-nums}
 .gallery-zoom button{position:absolute;right:46px;top:28px;display:flex;align-items:center;gap:18px;border:0;background:transparent;color:#fff;font-size:12px;padding:10px}.gallery-zoom button span{font-size:30px;font-weight:300}
 .project-gallery button:focus-visible{outline:2px solid white;outline-offset:5px}

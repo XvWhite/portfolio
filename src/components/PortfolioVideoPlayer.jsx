@@ -38,6 +38,7 @@ export default function PortfolioVideoPlayer({
     const node = video.current;
     if (!node) return;
     let hls;
+    let recoveryTimer;
     suppressError.current = true;
     node.pause();
     node.removeAttribute('src');
@@ -60,21 +61,52 @@ export default function PortfolioVideoPlayer({
       node.load();
       start();
     } else if (Hls.isSupported()) {
-      hls = new Hls({ enableWorker: true, backBufferLength: 30, maxBufferLength: 24, maxMaxBufferLength: 48 });
+      let networkRetries = 0;
+      let mediaRetries = 0;
+      hls = new Hls({
+        enableWorker: true,
+        lowLatencyMode: false,
+        startFragPrefetch: true,
+        backBufferLength: 20,
+        maxBufferLength: 30,
+        maxMaxBufferLength: 60,
+        maxBufferHole: .5,
+        highBufferWatchdogPeriod: 2,
+        fragLoadingMaxRetry: 4,
+        manifestLoadingMaxRetry: 3,
+        levelLoadingMaxRetry: 3,
+      });
       hls.loadSource(src);
       hls.attachMedia(node);
       hls.on(Hls.Events.MANIFEST_PARSED, start);
       hls.on(Hls.Events.ERROR, (_, data) => {
         if (!data.fatal) return;
+        if (data.type === Hls.ErrorTypes.NETWORK_ERROR && networkRetries < 3) {
+          networkRetries += 1;
+          setLoading(true);
+          window.clearTimeout(recoveryTimer);
+          recoveryTimer = window.setTimeout(() => hls?.startLoad(), networkRetries * 450);
+          return;
+        }
+        if (data.type === Hls.ErrorTypes.MEDIA_ERROR && mediaRetries < 2) {
+          mediaRetries += 1;
+          setLoading(true);
+          hls.recoverMediaError();
+          return;
+        }
         setLoading(false);
         setError(true);
       });
+      hls.on(Hls.Events.FRAG_LOADED, () => { networkRetries = 0; });
+      hls.on(Hls.Events.BUFFER_APPENDED, () => { mediaRetries = 0; });
+      hls.on(Hls.Events.DESTROYING, () => window.clearTimeout(recoveryTimer));
     } else {
       setLoading(false);
       setError(true);
     }
     return () => {
       suppressError.current = true;
+      window.clearTimeout(recoveryTimer);
       hls?.destroy();
       node.pause();
       node.removeAttribute('src');
