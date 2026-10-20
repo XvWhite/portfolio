@@ -1,4 +1,16 @@
-/hls/*
+/hls/nj/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/hls/toposh/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/hls/skills-ui/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/hls/story/familiar-stranger/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
+
+/hls/story/museum-night/*
   Cache-Control: public, max-age=604800, stale-while-revalidate=2592000
 
 /hls/story/urban-daydream-01-v2/*
