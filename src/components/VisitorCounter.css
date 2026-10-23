@@ -1,0 +1,32 @@
+.footer-utilities{
+  display:flex;
+  align-items:flex-end;
+  gap:clamp(18px,2.4vw,38px);
+  margin-left:auto;
+}
+
+.visitor-counter{
+  display:inline-flex;
+  align-items:baseline;
+  gap:8px;
+  min-width:92px;
+  opacity:0;
+  color:rgba(255,255,255,.42);
+  font-size:8px;
+  font-weight:300;
+  line-height:1;
+  letter-spacing:1.35px;
+  white-space:nowrap;
+  transition:opacity .55s ease;
+}
+
+.visitor-counter.is-ready{opacity:1}
+.visitor-counter strong{color:rgba(255,255,255,.58);font-size:8px;font-weight:300;font-variant-numeric:tabular-nums;letter-spacing:1px}
+
+@media(max-width:700px){
+  .footer-utilities{flex-direction:column;align-items:flex-end;gap:8px}
+  .visitor-counter{justify-content:flex-end;min-width:0;font-size:7px;letter-spacing:1px}
+  .visitor-counter strong{font-size:7px}
+}
+
+@media(prefers-reduced-motion:reduce){.visitor-counter{transition:none}}

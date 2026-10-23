@@ -11,6 +11,17 @@ npm run dev
 
 生产构建：`npm run build`。构建预览：`npm run preview`。
 
+## 独立访客计数
+
+页脚的 `VISITORS` 数字由 Cloudflare Pages Function `/api/visitors` 与 D1 数据库提供。同一浏览器使用保存在本地的匿名 UUID 去重，不采集 IP、地理位置或浏览内容。
+
+1. 在 Cloudflare 创建 D1 数据库 `portfolio-visitors`。
+2. 执行 `migrations/0001_create_visitors.sql` 初始化数据表。
+3. 在 Pages 项目的 Production 环境添加 D1 Binding：变量名 `VISITOR_DB`，数据库选择 `portfolio-visitors`。
+4. Preview 环境绑定单独的测试数据库，避免预览访问增加正式计数。
+
+本地仅运行 Vite 时没有 Pages Function 和 D1，计数会自动隐藏，网站其他功能不受影响。
+
 ## 内容与素材
 
 - `src/main.jsx`：个人经历、邮箱、项目与优势文案；项目集中在 `projects` 数组。
