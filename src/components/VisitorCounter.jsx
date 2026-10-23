@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './VisitorCounter.css';
 
 const STORAGE_KEY = 'gch_portfolio_visitor_id_v1';
